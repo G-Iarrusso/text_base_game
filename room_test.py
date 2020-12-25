@@ -1,5 +1,5 @@
 """
-First Room for TBG
+Room class for the TBG
 """
 
 
