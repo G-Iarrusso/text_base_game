@@ -1,5 +1,4 @@
 class Hazard:
-
     def __init__(self, x, y, tile_hazard):
         self.x = x
         self.y = y
@@ -19,9 +18,10 @@ class Hazards:
         self.hazards = hazards
 
     def clear_hazard(self, hazard):
-        for i in range(len(self.hazards)):
-            if self.hazards[i] == hazard:
-                self.hazards.pop(i)
+        for cur_hazard in (self.hazards):
+            if hazard in self.hazards:
+                self.hazards.remove(hazard)
+                self.print_hazards()
 
     def add_hazard(self, hazard):
         self.hazards.append(hazard)
