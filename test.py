@@ -1,4 +1,4 @@
-from room_test import Room
+from room import Room
 from hazards import Hazard, Hazards
 
 #room.print_room()
