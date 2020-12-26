@@ -10,7 +10,7 @@ class Hazard:
             self.tile = "e"
 
     def print_hazard(self):
-        print("X: " + str(self.x) + " Y: " + str(self.y) + " Tile type: " + self.tile)
+        print("X: " + str(self.x + 1) + " Y: " + str(self.y + 1) + " Tile type: " + self.tile)
 
 
 class Hazards:

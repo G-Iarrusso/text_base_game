@@ -5,14 +5,14 @@ Room class for the TBG
 
 class Room:
 
-    def __init__(self, x, y, start_x, start_y, hazards):
+    def __init__(self, x, y, player, hazards):
         self.room = [[0]*x for i in range(y)]
-        self.room[start_x][start_y] = 1
+        self.room[player.player_x][player.player_y] = 1
         for hazard in hazards.hazards:
             h_x, h_y = hazard.x, hazard.y
             self.room[h_x][h_y] = hazard.tile
-        self.location_x = start_x
-        self.location_y = start_y
+        self.location_x = player.player_x
+        self.location_y = player.player_y
 
     def update_room(self, hazards):
         self.room = [[0]*len(self.room) for i in range(len(self.room[0]))]
@@ -40,11 +40,12 @@ class Room:
             dungeon_room += dungeon_line
         print(dungeon_room)
 
-    def movement(self, direction):
+    def movement(self, direction, player):
         if direction == "north" and self.location_x != 0:
             if self.room[self.location_x-1][self.location_y] == 0:
                 self.room[self.location_x][self.location_y] = 0
                 new_x = self.location_x - 1
+                player.player_x = new_x
                 self.location_x = new_x
                 self.room[self.location_x][self.location_y] = 1
             else:
@@ -54,6 +55,7 @@ class Room:
             if self.room[self.location_x+1][self.location_y] == 0:
                 self.room[self.location_x][self.location_y] = 0
                 new_x = self.location_x + 1
+                player.player_x = new_x
                 self.location_x = new_x
                 self.room[self.location_x][self.location_y] = 1
             else:
@@ -63,6 +65,7 @@ class Room:
             if self.room[self.location_x+1][self.location_y+1] == 0:
                 self.room[self.location_x][self.location_y] = 0
                 new_y = self.location_y + 1
+                player.player_y = new_y
                 self.location_y = new_y
                 self.room[self.location_x][self.location_y] = 1
             else:
@@ -72,6 +75,7 @@ class Room:
             if self.room[self.location_x+1][self.location_y-1] == 0:
                 self.room[self.location_x][self.location_y] = 0
                 new_y = self.location_y - 1
+                player.player_y = new_y
                 self.location_y = new_y
                 self.room[self.location_x][self.location_y] = 1
             else:
