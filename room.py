@@ -5,12 +5,15 @@ Room class for the TBG
 
 class Room:
 
-    def __init__(self, x, y, player, hazards):
+    def __init__(self, x, y, player, dragons, hazards):
         self.room = [[0]*x for i in range(y)]
         self.room[player.player_x][player.player_y] = 1
         for hazard in hazards.hazards:
             h_x, h_y = hazard.x, hazard.y
             self.room[h_x][h_y] = hazard.tile
+        for dragon in dragons.dragons:
+            d_x,d_y = dragon.drag_x, dragon.drag_y
+            self.room[d_x][d_y] = dragon.species
         self.location_x = player.player_x
         self.location_y = player.player_y
 
@@ -32,6 +35,12 @@ class Room:
                     dungeon_line += "[E]"
                 elif self.room[x][y] == "w":
                     dungeon_line += "[W]"
+                elif self.room[x][y] == "fire":
+                    dungeon_line += "[FD]"
+                elif self.room[x][y] == "earth":
+                    dungeon_line += "[ED]"
+                elif self.room[x][y] == "water":
+                    dungeon_line += "[WD]"
                 elif self.room[x][y] == "f":
                     dungeon_line += "[F]"
                 else:
@@ -40,7 +49,7 @@ class Room:
             dungeon_room += dungeon_line
         print(dungeon_room)
 
-    def movement(self, direction, player):
+    def player_movement(self, direction, player):
         if direction == "north" and self.location_x != 0:
             if self.room[self.location_x-1][self.location_y] == 0:
                 self.room[self.location_x][self.location_y] = 0
