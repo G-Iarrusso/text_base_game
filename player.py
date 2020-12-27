@@ -13,7 +13,7 @@ class Player:
 
     def heal_all(self):
         self.current_health = self.starting_health
-    
+
     def heal(self, amount):
         self.current_health = self.current_health + amount
 
