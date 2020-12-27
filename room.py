@@ -41,14 +41,14 @@ class Room:
                     dungeon_line += "[F]"
 
                 elif self.room[x][y] == "fire":
-                    dungeon_line += "[FD]"
+                    dungeon_line += "[D]"
                 elif self.room[x][y] == "earth":
-                    dungeon_line += "[ED]"
+                    dungeon_line += "[D]"
                 elif self.room[x][y] == "water":
-                    dungeon_line += "[WD]"
+                    dungeon_line += "[D]"
 
                 else:
-                    dungeon_line += "[]"
+                    dungeon_line += "[ ]"
             dungeon_line += "\n"
             dungeon_room += dungeon_line
         print(dungeon_room)

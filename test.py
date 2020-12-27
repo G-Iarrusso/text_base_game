@@ -36,3 +36,7 @@ room.player_movement("west", guy)
 #guy.print_player()
 room.update_room(guy, room_Hazards, dragons)
 room.print_room()
+for i in range(5):
+    room.dragon_movement(earth_drag, guy)
+    room.update_room(guy, room_Hazards, dragons)
+    room.print_room()
