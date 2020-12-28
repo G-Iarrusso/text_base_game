@@ -19,14 +19,11 @@ room_Hazards.clear_hazard(earth_tile)
 room.update_room(room_Hazards)
 room.print_room()
 """
-<<<<<<< HEAD
 
 #testing movement 
 '''
 guy = Player(50,50,4,6)
-=======
 guy = Player(50,50,2,4)
->>>>>>> master
 
 earth_tile = Hazard(1,1,"earth")
 water_tile = Hazard(2,2,"water")
@@ -79,7 +76,7 @@ while True:
         #if player moves to dragon
         if guy.is_in_combat(room):
             print("\nENTER COMBAT!!!!!")
-            val = guy.combat(earth_drag)
+            val = guy.combat(earth_drag,dragons)
             room.update_room(guy, room_Hazards, dragons)
             room.print_room() 
             continue
@@ -87,11 +84,11 @@ while True:
         room.dragon_movement(earth_drag, guy)
         room.update_room(guy, room_Hazards, dragons)
         room.print_room() 
-        print(earth_drag.print_dragon())
+
         #if dragon moves to player
         if guy.is_in_combat(room):
             print("\nENTER COMBAT!!!!!")
-            val = guy.combat(earth_drag)
+            val = guy.combat(earth_drag,dragons)
             room.update_room(guy, room_Hazards, dragons)
             room.print_room() 
             continue

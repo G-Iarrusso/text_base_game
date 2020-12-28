@@ -87,7 +87,7 @@ class Player:
         else:
             return False
 
-    def combat(self,dragon):
+    def combat(self,dragon,dragons):
         
         while self.current_health>0 and dragon.current_health>0:
             block=False
@@ -173,9 +173,10 @@ class Player:
             if self.current_health<=0:
                 return False
             elif dragon.current_health<=0:
-                
+                dragons.clear_dragon(dragon)
                 print("Your health: "+str(self.current_health))
                 print("Dragons health: 0")
+                
                 return True
 
 
