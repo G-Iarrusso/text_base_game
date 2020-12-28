@@ -8,7 +8,7 @@ class Dragon:
         self.species = species
         self.current_heath = current_health
         self.starting_health = starting_health
-    
+
     def print_dragon(self):
         """
         Dragon info
@@ -21,7 +21,7 @@ class Dragons:
 
     def __init__(self, dragons):
         self.dragons = dragons
-    
+
     def clear_dragon(self, dragon):
         """
         If the dragon exists we remove it
