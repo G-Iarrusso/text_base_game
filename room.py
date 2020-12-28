@@ -100,11 +100,11 @@ class Room:
         """
         dif_x = dragon.drag_x - player.player_x
         dif_y = dragon.drag_y - player.player_y
-        if dif_x < 0 and self.room[dragon.drag_x+1][dragon.drag_y] == 0:
+        if dif_x < 0 and self.room[dragon.drag_x+1][dragon.drag_y] != 1:
             dragon.drag_x = dragon.drag_x + 1
-        elif dif_x > 0 and self.room[dragon.drag_x-1][dragon.drag_y] == 0:
+        elif dif_x > 0 and self.room[dragon.drag_x-1][dragon.drag_y] != 1:
             dragon.drag_x = dragon.drag_x - 1
-        if dif_y < 0 and self.room[dragon.drag_x][dragon.drag_y+1] == 0:
+        if dif_y < 0 and self.room[dragon.drag_x][dragon.drag_y+1] != 1:
             dragon.drag_y = dragon.drag_y + 1
-        elif dif_y > 0 and self.room[dragon.drag_x][dragon.drag_y-1] == 0:
+        elif dif_y > 0 and self.room[dragon.drag_x][dragon.drag_y-1] != 1:
             dragon.drag_y = dragon.drag_y - 1
