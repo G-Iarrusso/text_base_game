@@ -19,14 +19,14 @@ room_Hazards.clear_hazard(earth_tile)
 room.update_room(room_Hazards)
 room.print_room()
 """
-guy = Player(50,50,4,6)
+guy = Player(50,50,2,4)
 
 earth_tile = Hazard(1,1,"earth")
 water_tile = Hazard(2,2,"water")
 fire_tile = Hazard(3,3,"fire")
 room_Hazards = Hazards([earth_tile, water_tile, fire_tile])
 
-earth_drag = Dragon(8,8,"earth",50,50)
+earth_drag = Dragon(2,1,"earth",50,50)
 dragons = Dragons([earth_drag])
 
 room = Room(11, 10, guy, dragons, room_Hazards)
