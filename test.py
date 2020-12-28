@@ -2,6 +2,7 @@ from room import Room
 from hazards import Hazard, Hazards
 from player import Player
 from dragon import Dragon, Dragons
+from debugging import print_dragons, print_player, print_hazards
 """
 #room.print_room()
 #room.movement("west")
@@ -20,7 +21,7 @@ room.update_room(room_Hazards)
 room.print_room()
 """
 
-#testing movement 
+# testing movement 
 '''
 guy = Player(50,50,4,6)
 guy = Player(50,50,2,4)
@@ -52,47 +53,48 @@ for i in range(5):
     room.print_room()
 '''
 
-#testing combat
+# testing combat
 
 guy = Player(50,50,0,0)
-
+print_player(guy)
 earth_tile = Hazard(1,1,"earth")
 water_tile = Hazard(2,2,"water")
 fire_tile = Hazard(3,3,"fire")
 room_Hazards = Hazards([earth_tile, water_tile, fire_tile])
-
+print_hazards(room_Hazards)
 earth_drag = Dragon(8,8,"earth",50,50)
 dragons = Dragons([earth_drag])
+print_dragons(dragons)
 room = Room(11, 10, guy, dragons, room_Hazards)
 room.print_room()
 while True:
     print("Enter MOVE and either north, east, south, or west.")
     dir = input('')
- 
-    tokens=dir.split(' ')
-    if tokens[0]=="MOVE":
+
+    tokens = dir.split(' ')
+    if tokens[0] == "MOVE":
 
         room.player_movement(tokens[1], guy)
-        #if player moves to dragon
+        # if player moves to dragon
         if guy.is_in_combat(room):
             print("\nENTER COMBAT!!!!!")
-            val = guy.combat(earth_drag,dragons)
+            val = guy.combat(earth_drag, dragons)
             room.update_room(guy, room_Hazards, dragons)
-            room.print_room() 
+            room.print_room()
             continue
-        
+
         room.dragon_movement(earth_drag, guy)
         room.update_room(guy, room_Hazards, dragons)
-        room.print_room() 
+        room.print_room()
 
-        #if dragon moves to player
+        # if dragon moves to player
         if guy.is_in_combat(room):
             print("\nENTER COMBAT!!!!!")
-            val = guy.combat(earth_drag,dragons)
+            val = guy.combat(earth_drag, dragons)
             room.update_room(guy, room_Hazards, dragons)
-            room.print_room() 
+            room.print_room()
             continue
-    elif dir=='no':
+    elif dir == 'no':
         break
     else:
         print('Invalid try again')
