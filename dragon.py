@@ -6,7 +6,7 @@ class Dragon:
         self.drag_x = x
         self.drag_y = y
         self.species = species
-        self.current_heath = current_health
+        self.current_health = current_health
         self.starting_health = starting_health
 
     def print_dragon(self):
@@ -14,7 +14,7 @@ class Dragon:
         Dragon info
         """
         print("x:" + str(self.drag_x + 1) + " Y: " + str(self.drag_y + 1))
-        print("Species: " + self.species + " Current health: " + str(self.current_heath) + " Total health: " + str(self.starting_health))
+        print("Species: " + self.species + ", Current health: " + str(self.current_health) + ", Total health: " + str(self.starting_health))
 
 
 class Dragons:
