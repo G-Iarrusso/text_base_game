@@ -79,13 +79,13 @@ class Room:
                 print("object is in your path")
 
         elif direction == "east" and player.player_y != len(self.room[0])-1:
-            if self.room[player.player_x+1][player.player_y+1] == 0:
+            if self.room[player.player_x][player.player_y+1] == 0:
                 player.player_y = player.player_y + 1
             else:
                 print("object is in your path")
 
         elif direction == "west" and player.player_y != 0:
-            if self.room[player.player_x+1][player.player_y-1] == 0:
+            if self.room[player.player_x][player.player_y-1] == 0:
                 player.player_y = player.player_y - 1
             else:
                 print("object is in your path")

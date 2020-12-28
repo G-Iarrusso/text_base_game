@@ -54,7 +54,7 @@ for i in range(5):
 
 #testing combat
 
-guy = Player(50,50,4,6)
+guy = Player(50,50,0,0)
 
 earth_tile = Hazard(1,1,"earth")
 water_tile = Hazard(2,2,"water")
