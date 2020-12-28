@@ -6,6 +6,9 @@ Room class for the TBG
 class Room:
 
     def __init__(self, x, y, player, dragons, hazards):
+        """
+        creates the room
+        """
         self.room = [[0]*x for i in range(y)]
         self.room[player.player_x][player.player_y] = 1
         for hazard in hazards.hazards:
@@ -16,6 +19,9 @@ class Room:
             self.room[d_x][d_y] = dragon.species
 
     def update_room(self, player, hazards, dragons):
+        """
+        This will updaqte the room whenever we add or remove an entity we should call this function
+        """
         self.room = [[0]*len(self.room[0]) for i in range(len(self.room))]
         for hazard in hazards.hazards:
             h_x, h_y = hazard.x, hazard.y
@@ -26,6 +32,9 @@ class Room:
         self.room[player.player_x][player.player_y] = 1
 
     def print_room(self):
+        """
+        This prints the room for the user, this isnt like other prints this is for actual game
+        """
         dungeon_room = ""
         for x in range(len(self.room)):
             dungeon_line = ""
@@ -54,6 +63,9 @@ class Room:
         print(dungeon_room)
 
     def player_movement(self, direction, player):
+        """
+        Player uses the cardinal directions to move on the map 
+        """
         if direction == "north" and player.player_x != 0:
             if self.room[player.player_x-1][player.player_y] == 0:
                 player.player_x = player.player_x - 1
@@ -82,6 +94,10 @@ class Room:
             print("invalid input please try again")
 
     def dragon_movement(self, dragon, player):
+        """
+        Dragons will auto move towards the player
+        can go over the hazard tiles
+        """
         dif_x = dragon.drag_x - player.player_x
         dif_y = dragon.drag_y - player.player_y
         if dif_x < 0 and self.room[dragon.drag_x+1][dragon.drag_y] == 0:
@@ -92,4 +108,3 @@ class Room:
             dragon.drag_y = dragon.drag_y + 1
         elif dif_y > 0 and self.room[dragon.drag_x][dragon.drag_y-1] == 0:
             dragon.drag_y = dragon.drag_y - 1
-        
