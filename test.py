@@ -27,8 +27,13 @@ fire_tile = Hazard(3,3,"fire")
 room_Hazards = Hazards([earth_tile, water_tile, fire_tile])
 
 earth_drag = Dragon(8,8,"earth",50,50)
+fire_drag = Dragon(8,8,"fire",50,50)
 dragons = Dragons([earth_drag])
+dragons.add_dragon(fire_drag)
+dragons.print_dragons()
+dragons.clear_dragon(fire_drag)
 
+"""
 room = Room(11, 10, guy, dragons, room_Hazards)
 room.print_room()
 #guy.print_player()
@@ -40,3 +45,4 @@ for i in range(5):
     room.dragon_movement(earth_drag, guy)
     room.update_room(guy, room_Hazards, dragons)
     room.print_room()
+"""
