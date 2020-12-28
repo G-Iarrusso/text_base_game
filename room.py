@@ -92,4 +92,3 @@ class Room:
             dragon.drag_y = dragon.drag_y + 1
         elif dif_y > 0 and self.room[dragon.drag_x][dragon.drag_y-1] != 1:
             dragon.drag_y = dragon.drag_y - 1
-        
