@@ -68,7 +68,7 @@ while True:
         room.player_movement(tokens[1], guy)
         #if player moves to dragon
         if guy.is_in_combat(room):
-            print("enter combat!!!!!")
+            print("\nENTER COMBAT!!!!!")
             val = guy.combat(earth_drag)
             room.update_room(guy, room_Hazards, dragons)
             room.print_room() 
@@ -80,7 +80,7 @@ while True:
         print(earth_drag.print_dragon())
         #if dragon moves to player
         if guy.is_in_combat(room):
-            print("enter combat!!!!!")
+            print("\nENTER COMBAT!!!!!")
             val = guy.combat(earth_drag)
             room.update_room(guy, room_Hazards, dragons)
             room.print_room() 
@@ -88,4 +88,4 @@ while True:
     elif dir=='no':
         break
     else:
-        print('invalid try again')
+        print('Invalid try again')
