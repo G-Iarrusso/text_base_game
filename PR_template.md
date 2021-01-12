@@ -1,6 +1,6 @@
 # Description
 
-What are you trying to do.
+What are you trying to do?
 
 Fixes # (issue)
 
