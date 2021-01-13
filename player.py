@@ -86,8 +86,8 @@ class Player:
         while self.current_health > 0 and dragon.current_health > 0:
             block = False
             dodge = False
-            print("\nYour health: "+str(self.current_health))
-            print("Dragons health: "+str(dragon.current_health))
+            print("\nYour health: " + str(self.current_health))
+            print("Dragons health: " + str(dragon.current_health))
             print("Enter one of these commands\n'qa' for quick attack\n'ha' for heavy attack\n'do' for dodge\n'bl' for block.")
             action = input('')
             rand = random.randint(0,100)
@@ -100,7 +100,7 @@ class Player:
                 else:
                     print("You miss with a quick attack")
 
-            elif action =='ha':
+            elif action == 'ha':
 
                 # if (0,100)<=75
                 if rand <= heavy_attack_acc:
@@ -110,14 +110,13 @@ class Player:
                     print("You swing for a big attack but the dragon moves and you miss")
 
             elif action == "bl":
-            
+
                 # if (0,100)<=95
                 if rand <= block_acc:
                     print("You raise your shield")
                     block = True
                 else:
                     print("The dragon goes around your shield")
-
 
             elif action == 'do':
 
