@@ -12,12 +12,6 @@ class Hazard:
         elif tile_hazard == "earth":
             self.tile = "e"
 
-    def print_hazard(self):
-        """
-        Hazards info
-        """
-        print("X: " + str(self.x + 1) + " Y: " + str(self.y + 1) + " Tile type: " + self.tile)
-
 
 class Hazards:
     def __init__(self, hazards):
@@ -37,10 +31,3 @@ class Hazards:
         Add a new hazard to the room
         """
         self.hazards.append(hazard)
-
-    def print_hazards(self):
-        """
-        prints all the hazards
-        """
-        for i in range(len(self.hazards)):
-            self.hazards[i].print_hazard()
