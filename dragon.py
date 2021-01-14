@@ -22,7 +22,6 @@ class Dragons:
         for cur_dragon in (self.dragons):
             if dragon in self.dragons:
                 self.dragons.remove(dragon)
-                self.print_dragons()
 
     def add_dragon(self, dragon):
         """

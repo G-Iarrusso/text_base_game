@@ -5,31 +5,41 @@ Room class for the TBG
 
 class Room:
 
-    def __init__(self, x, y, player, dragons, hazards):
+    def __init__(self, x, y, player=None, dragons=None, hazards=None):
         """
         creates the room
         """
         self.room = [[0]*x for i in range(y)]
-        self.room[player.player_x][player.player_y] = 1
-        for hazard in hazards.hazards:
-            h_x, h_y = hazard.x, hazard.y
-            self.room[h_x][h_y] = hazard.tile
-        for dragon in dragons.dragons:
-            d_x, d_y = dragon.drag_x, dragon.drag_y
-            self.room[d_x][d_y] = dragon.species
+        if player is not None:
+            self.room[player.player_x][player.player_y] = 1
 
-    def update_room(self, player, hazards, dragons):
+        if hazards is not None:
+            for hazard in hazards.hazards:
+                h_x, h_y = hazard.x, hazard.y
+                self.room[h_x][h_y] = hazard.tile
+
+        if dragons is not None:
+            for dragon in dragons.dragons:
+                d_x, d_y = dragon.drag_x, dragon.drag_y
+                self.room[d_x][d_y] = dragon.species
+
+    def update_room(self, player=None, dragons=None, hazards=None):
         """
         This will updaqte the room whenever we add or remove an entity we should call this function
         """
         self.room = [[0]*len(self.room[0]) for i in range(len(self.room))]
-        for hazard in hazards.hazards:
-            h_x, h_y = hazard.x, hazard.y
-            self.room[h_x][h_y] = hazard.tile
-        for dragon in dragons.dragons:
-            d_x, d_y = dragon.drag_x, dragon.drag_y
-            self.room[d_x][d_y] = dragon.species
-        self.room[player.player_x][player.player_y] = 1
+        if player is not None:
+            self.room[player.player_x][player.player_y] = 1
+
+        if hazards is not None:
+            for hazard in hazards.hazards:
+                h_x, h_y = hazard.x, hazard.y
+                self.room[h_x][h_y] = hazard.tile
+
+        if dragons is not None:
+            for dragon in dragons.dragons:
+                d_x, d_y = dragon.drag_x, dragon.drag_y
+                self.room[d_x][d_y] = dragon.species
 
     def print_room(self):
         """
@@ -61,6 +71,7 @@ class Room:
             dungeon_line += "\n"
             dungeon_room += dungeon_line
         print(dungeon_room)
+        return dungeon_room
 
     def player_movement(self, direction, player):
         """

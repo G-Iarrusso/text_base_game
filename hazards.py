@@ -24,7 +24,6 @@ class Hazards:
         for cur_hazard in (self.hazards):
             if hazard in self.hazards:
                 self.hazards.remove(hazard)
-                self.print_hazards()
 
     def add_hazard(self, hazard):
         """
