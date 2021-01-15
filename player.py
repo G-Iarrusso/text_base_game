@@ -56,82 +56,90 @@ class Player:
         self.current_health = self.current_health + armour
 
     def is_in_combat(self, room):
+        dragons = ["earth", "water", "fire"]
         # adjacents
-        if room.room[self.player_x][self.player_y] == 'earth':
+        if room.room[self.player_x][self.player_y] in dragons:
             return True
-        elif room.room[self.player_x+1][self.player_y] == 'earth':
+        elif room.room[self.player_x+1][self.player_y] in dragons:
             return True
-        elif room.room[self.player_x-1][self.player_y] == 'earth':
+        elif room.room[self.player_x-1][self.player_y] in dragons:
             return True
-        elif room.room[self.player_x][self.player_y+1] == 'earth':
+        elif room.room[self.player_x][self.player_y+1] in dragons:
             return True
-        elif room.room[self.player_x][self.player_y-1] == 'earth':
+        elif room.room[self.player_x][self.player_y-1] in dragons:
             return True
 
         # diagonals
-        elif room.room[self.player_x+1][self.player_y+1] == 'earth':
+        elif room.room[self.player_x+1][self.player_y+1] in dragons:
             return True
-        elif room.room[self.player_x+1][self.player_y-1] == 'earth':
+        elif room.room[self.player_x+1][self.player_y-1] in dragons:
             return True
-        elif room.room[self.player_x-1][self.player_y+1] == 'earth':
+        elif room.room[self.player_x-1][self.player_y+1] in dragons:
             return True
-        elif room.room[self.player_x-1][self.player_y-1] == 'earth':
+        elif room.room[self.player_x-1][self.player_y-1] in dragons:
             return True
 
         else:
             return False
+
+    def quick_attack(self, dragon, dragons, num):
+        if num <= quick_attack_acc:
+            print("You hit with a quick attack")
+            dragon.current_health = dragon.current_health-quick_attack_dmg
+        else:
+            print("You miss with a quick attack")
+
+    def heavy_attack(self, dragon, dragons, num):
+        if num <= heavy_attack_acc:
+            print("You hit with a heavy attack for big damage")
+            dragon.current_health = dragon.current_health-heavy_attack_dmg
+        else:
+            print("You swing for a big attack but the dragon moves and you miss")
+
+    def block(self, dragon, dragons, num):
+        if num <= block_acc:
+            print("You raise your shield")
+            return True
+        else:
+            print("The dragon goes around your shield")
+
+    def dodge(self, dragon, dragons, num):
+        if num <= dodge_acc:
+            print("You get ready to dodge the next attack")
+            return True
+        else:
+            print("You trip while trying to get out of the way")
 
     def combat(self, dragon, dragons):
 
         while self.current_health > 0 and dragon.current_health > 0:
             block = False
             dodge = False
+            """
+            TODO we should move this interaction outside of the class
+            """
             print("\nYour health: " + str(self.current_health))
             print("Dragons health: " + str(dragon.current_health))
             print("Enter one of these commands\n'qa' for quick attack\n'ha' for heavy attack\n'do' for dodge\n'bl' for block.")
             action = input('')
-            rand = random.randint(0,100)
+            rand = random.randint(0, 100)
             if action == "qa":
-
-                # if (0,100)<=95
-                if rand <= quick_attack_acc:
-                    print("You hit with a quick attack")
-                    dragon.current_health = dragon.current_health-quick_attack_dmg
-                else:
-                    print("You miss with a quick attack")
+                self.quick_attack(dragon, dragons, rand)
 
             elif action == 'ha':
-
-                # if (0,100)<=75
-                if rand <= heavy_attack_acc:
-                    print("You hit with a heavy attack for big damage")
-                    dragon.current_health = dragon.current_health-heavy_attack_dmg
-                else:
-                    print("You swing for a big attack but the dragon moves and you miss")
+                self.heavy_attack(dragon, dragons, rand)
 
             elif action == "bl":
-
-                # if (0,100)<=95
-                if rand <= block_acc:
-                    print("You raise your shield")
-                    block = True
-                else:
-                    print("The dragon goes around your shield")
+                block = self.block(dragon, dragons, rand)
 
             elif action == 'do':
-
-                # if (0,100)<=75
-                if rand <= dodge_acc:
-                    print("You get ready to dodge the next attack")
-                    dodge = True
-                else:
-                    print("You trip while trying to get out of the way")
+                dodge = self.dodge(dragon, dragons, rand)
 
             else:
                 print("Invalid command")
                 continue
 
-            drag_action = random.randint(1,3)
+            drag_action = random.randint(1, 3)
 
             if drag_action == 1:
                 if dodge:
