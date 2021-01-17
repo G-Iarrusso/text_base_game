@@ -8,6 +8,30 @@ class Dragon:
         self.species = species
         self.current_health = current_health
         self.starting_health = starting_health
+        self.claw = 5
+        self.tail = 10
+        self.breath = 15
+
+    def get_drag_x(self):
+        return self.drag_x
+
+    def get_drag_y(self):
+        return self.drag_y
+
+    def get_drag_species(self):
+        return self.species
+
+    def get_drag_health(self):
+        return self.current_health
+
+    def get_drag_claw(self):
+        return self.claw
+
+    def get_drag_tail(self):
+        return self.tail
+
+    def get_drag_breath(self):
+        return self.breath
 
 
 class Dragons:

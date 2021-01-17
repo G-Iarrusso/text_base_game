@@ -11,6 +11,15 @@ class Hazard:
             self.tile = "w"
         elif tile_hazard == "earth":
             self.tile = "e"
+ 
+    def get_hazard_type(self):
+        return self.tile
+
+    def get_hazard_x(self):
+        return self.x
+
+    def get_hazard_y(self):
+        return self.y
 
 
 class Hazards:
