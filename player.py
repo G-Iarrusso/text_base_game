@@ -28,6 +28,9 @@ class Player:
         self.dodge_acc = 75
         self.block_acc = 95
 
+    def is_dead(self):
+        return self.current_health <= 0
+
     def take_damage(self, damage):
         """
         adjusts health based on damage taken

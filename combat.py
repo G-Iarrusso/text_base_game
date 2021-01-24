@@ -1,5 +1,12 @@
 import random
 
+"""
+TODO
+seperate combat to player and dragon combat
+then have a combat function call both combats
+"""
+BLOCK_ACC = 0.05
+
 
 def is_in_combat(player, room):
     dragons = ["earth", "water", "fire"]
@@ -30,23 +37,23 @@ def is_in_combat(player, room):
 
 
 def quick_attack(player, dragon, dragons, num):
-    if num <= quick_attack_acc:
+    if num <= player.quick_attack_acc:
         print("You hit with a quick attack")
-        dragon.current_health = dragon.current_health-quick_attack_dmg
+        dragon.current_health = dragon.current_health-player.quick_attack_dmg
     else:
         print("You miss with a quick attack")
 
 
 def heavy_attack(player, dragon, dragons, num):
-    if num <= heavy_attack_acc:
+    if num <= player.heavy_attack_acc:
         print("You hit with a heavy attack for big damage")
-        dragon.current_health = dragon.current_health-heavy_attack_dmg
+        dragon.current_health = dragon.current_health-player.heavy_attack_dmg
     else:
         print("You swing for a big attack but the dragon moves and you miss")
 
 
 def block(player, dragon, dragons, num):
-    if num <= block_acc:
+    if num <= BLOCK_ACC:
         print("You raise your shield")
         return True
     else:
@@ -54,11 +61,44 @@ def block(player, dragon, dragons, num):
 
 
 def dodge(player, dragon, dragons, num):
-    if num <= dodge_acc:
+    if num <= player.dodge_acc:
         print("You get ready to dodge the next attack")
         return True
     else:
         print("You trip while trying to get out of the way")
+
+
+def claw(player, dragon, block, dodge):
+    if dodge:
+        print("You get out of the way of the claw")
+    elif block:
+        print("Your shield aborbs most of the claw attack")
+        player.current_health = player.current_health-(dragon.claw * dragon.block_val)
+    else:
+        print("The dragon swipes with its claws and hits you")
+        player.current_health = player.current_health-dragon.claw
+
+
+def breath(player, dragon, block, dodge):
+    if dodge:
+        print("You get out of the way of the breath attack")
+    elif block:
+        print("Your shield aborbs most of the breath attack")
+        player.current_health = player.current_health-(dragon.breath * dragon.block_val)
+    else:
+        print("The dragon uses its dragon breath to hurt you")
+        player.current_health = player.current_health-dragon.breath
+
+
+def tail(player, dragon, block, dodge):
+    if dodge:
+        print("You get out of the way of the tail attack")
+    elif block:
+        print("Your shield aborbs most of the force of the tail")
+        player.current_health = player.current_health-(dragon.tail * dragon.block_val)
+    else:
+        print("The dragon uses its dragon breath to hurt you")
+        player.current_health = player.current_health-dragon.tail
 
 
 def combat(player, dragon, dragons):
@@ -75,16 +115,16 @@ def combat(player, dragon, dragons):
         action = input('')
         rand = random.randint(0, 100)
         if action == "qa":
-            player.quick_attack(dragon, dragons, rand)
+            quick_attack(player, dragon, dragons, rand)
 
         elif action == 'ha':
-            player.heavy_attack(dragon, dragons, rand)
+            heavy_attack(player, dragon, dragons, rand)
 
         elif action == "bl":
-            block = player.block(dragon, dragons, rand)
+            block = block(player, dragon, dragons, rand)
 
         elif action == 'do':
-            dodge = player.dodge(dragon, dragons, rand)
+            dodge = dodge(player, dragon, dragons, rand)
 
         else:
             print("Invalid command")
@@ -93,37 +133,17 @@ def combat(player, dragon, dragons):
         drag_action = random.randint(1, 3)
 
         if drag_action == 1:
-            if dodge:
-                print("You get out of the way of the claw")
-            elif block:
-                print("Your shield aborbs most of the claw attack")
-                player.current_health = player.current_health-(claw_dmg * block_val)
-            else:
-                print("The dragon swipes with its claws and hits you")
-                player.current_health = player.current_health-claw_dmg
+            claw(player, dragon, block, dodge)
 
         elif drag_action == 2:
-            if dodge:
-                print("You get out of the way of the breath attack")
-            elif block:
-                print("Your shield aborbs most of the breath attack")
-                player.current_health = player.current_health-(breath_dmg * block_val)
-            else:
-                print("The dragon uses its dragon breath to hurt you")
-                player.current_health = player.current_health-breath_dmg
+            tail(player, dragon, block, dodge)
 
         elif drag_action == 3:
-            if dodge:
-                print("You get out of the way of the tail attack")
-            elif block:
-                print("Your shield aborbs most of the force of the tail")
-                player.current_health = player.current_health-(tail_dmg * block_val)
-            else:
-                print("The dragon uses its dragon breath to hurt you")
-                player.current_health = player.current_health-tail_dmg
+            breath(player, dragon, block, dodge)
 
         if player.current_health <= 0:
             return False
+
         elif dragon.current_health <= 0:
             dragons.clear_dragon(dragon)
             print("Your health: "+str(player.current_health))
