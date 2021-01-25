@@ -18,6 +18,8 @@ class Player:
         """
         self.starting_health = starting_health
         self.current_health = current_health
+        self.starting_bandage = 3
+        self.current_bandage = 3
         self.player_x = player_x
         self.player_y = player_y
 
@@ -42,7 +44,7 @@ class Player:
 
     def heal_all(self):
         """
-        heals the player to their startign health
+        heals the player to their starting health
         """
         self.current_health = self.starting_health
 
@@ -58,6 +60,24 @@ class Player:
         """
         self.starting_health = self.starting_health + armour
         self.current_health = self.current_health + armour
+
+    def bandage(self):
+        if self.bandage > 0:
+            self.bandage = self.bandage - 1
+            self.heal(5)
+            return True
+        return False
+
+    def gain_damage(self, amount):
+        self.heavy_attack_dmg = self.heavy_attack_dmg + amount
+        self.quick_attack_dmg = self.quick_attack_dmg + amount
+
+    def add_bandage(self, amount):
+        self.current_bandage = self.current_bandage + amount
+        self.starting_bandage = self. starting_bandage + amount
+
+    def reset_bandage(self):
+        self.current_bandage = self.add_bandage
 
     def get_player_x(self):
         return self.player_x
