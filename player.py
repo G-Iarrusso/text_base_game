@@ -1,14 +1,4 @@
 # player stats
-quick_attack_dmg = 15
-quick_attack_acc = 95
-
-heavy_attack_dmg = 30
-heavy_attack_acc = 75
-
-dodge_acc = 75
-
-block_acc = 95
-block_val = 0.05
 
 
 class Player:
