@@ -33,6 +33,15 @@ class Dragon:
     def get_drag_breath(self):
         return self.breath
 
+    def set_drag_health(self, health):
+        self.current_health = health
+
+    def set_drag_x(self, x):
+        self.drag_x = x
+
+    def set_drag_y(self, y):
+        self.drag_y = y
+
 
 class Dragons:
 

@@ -5,58 +5,58 @@ TODO
 seperate combat to player and dragon combat
 then have a combat function call both combats
 """
-BLOCK_ACC = 0.05
+BLOCK_VAL = 0.05
 
 
 def is_in_combat(player, room):
     dragons = ["earth", "water", "fire"]
     # adjacents
-    if room.room[player.player_x][player.player_y] in dragons:
+    if room.room[player.get_player_x()][player.get_player_y()] in dragons:
         return True
-    elif room.room[player.player_x+1][player.player_y] in dragons:
+    elif room.room[player.get_player_x()+1][player.get_player_y()] in dragons:
         return True
-    elif room.room[player.player_x-1][player.player_y] in dragons:
+    elif room.room[player.get_player_x()-1][player.get_player_y()] in dragons:
         return True
-    elif room.room[player.player_x][player.player_y+1] in dragons:
+    elif room.room[player.get_player_x()][player.get_player_y()+1] in dragons:
         return True
-    elif room.room[player.player_x][player.player_y-1] in dragons:
+    elif room.room[player.get_player_x()][player.get_player_y()-1] in dragons:
         return True
 
     # diagonals
-    elif room.room[player.player_x+1][player.player_y+1] in dragons:
+    elif room.room[player.get_player_x()+1][player.get_player_y()+1] in dragons:
         return True
-    elif room.room[player.player_x+1][player.player_y-1] in dragons:
+    elif room.room[player.get_player_x()+1][player.get_player_y()-1] in dragons:
         return True
-    elif room.room[player.player_x-1][player.player_y+1] in dragons:
+    elif room.room[player.get_player_x()-1][player.get_player_y()+1] in dragons:
         return True
-    elif room.room[player.player_x-1][player.player_y-1] in dragons:
+    elif room.room[player.get_player_x()-1][player.get_player_y()-1] in dragons:
         return True
     else:
         return False
 
 
 def quick_attack(player, dragon, num):
-    if num <= player.quick_attack_acc:
-        dragon.current_health = dragon.current_health-player.quick_attack_dmg
+    if num <= player.get_player_qa_acc():
+        dragon.set_drag_health(dragon.get_drag_health()-player.get_player_qa_dmg())
         return True
     return False
 
 
 def heavy_attack(player, dragon, num):
-    if num <= player.heavy_attack_acc:
-        dragon.current_health = dragon.current_health-player.heavy_attack_dmg
+    if num <= player.get_player_ha_acc:
+        dragon.set_drag_health(dragon.get_drag_health()-player.get_player_ha_dmg())
         return True
     return False
 
 
 def block(player, num):
-    if num <= BLOCK_ACC:
+    if num <= player.get_player_bl_acc():
         return True
     return False
 
 
 def dodge(player, num):
-    if num <= player.dodge_acc:
+    if num <= player.get_player_do_acc():
         return True
     return False
 
@@ -65,10 +65,10 @@ def claw(player, dragon, block, dodge):
     if dodge:
         return -1
     elif block:
-        player.current_health = player.current_health-(dragon.claw * dragon.block_val)
+        player.set_player_health(player.get_player_health()-(dragon.get_drag_claw() * BLOCK_VAL))
         return 0
     else:
-        player.current_health = player.current_health-dragon.claw
+        player.set_player_health(player.get_player_health()-dragon.get_drag_claw())
         return 1
 
 
@@ -76,10 +76,10 @@ def breath(player, dragon, block, dodge):
     if dodge:
         return -1
     elif block:
-        player.current_health = player.current_health-(dragon.breath * dragon.block_val)
+        player.set_player_health(player.get_player_health()-(dragon.get_drag_breath() * BLOCK_VAL))
         return 0
     else:
-        player.current_health = player.current_health-dragon.breath
+        player.set_player_health(player.get_player_health()-dragon.get_drag_breath())
         return 1
 
 
@@ -87,10 +87,10 @@ def tail(player, dragon, block, dodge):
     if dodge:
         return -1
     elif block:
-        player.current_health = player.current_health-(dragon.tail * dragon.block_val)
+        player.set_drag_health(player.get_player_health()-(dragon.get_drag_tail() * BLOCK_VAL))
         return 0
     else:
-        player.current_health = player.current_health-dragon.tail
+        player.set_drag_health(player.get_player_health-dragon.get_drag_tail())
         return 1
 
 
@@ -125,8 +125,6 @@ def check_deaths(player, dragon, dragons):
         return 0
     elif dragon.current_health <= 0:
         dragons.clear_dragon(dragon)
-        print("Your health: "+str(player.current_health))
-        print("Dragons health: 0")
         return 1
     return -1
 

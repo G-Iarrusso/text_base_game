@@ -95,3 +95,12 @@ class Player:
 
     def get_player_bl_acc(self):
         return self.block_acc
+
+    def set_player_x(self, x):
+        self.player_x = x
+
+    def set_player_y(self, y):
+        self.player_y = y
+
+    def set_player_health(self, health):
+        self.current_health = health

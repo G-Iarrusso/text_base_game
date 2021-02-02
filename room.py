@@ -77,27 +77,27 @@ class Room:
         """
         Player uses the cardinal directions to move on the map 
         """
-        if direction == "north" and player.player_x != 0:
-            if self.room[player.player_x-1][player.player_y] == 0:
-                player.player_x = player.player_x - 1
+        if direction == "north" and player.get_player_x() != 0:
+            if self.room[player.get_player_x()-1][player.get_player_y()] == 0:
+                player.set_player_x(player.get_player_x() - 1)
             else:
                 print("object is in your path")
 
-        elif direction == "south" and player.player_x != len(self.room)-1:
-            if self.room[player.player_x+1][player.player_y] == 0:
-                player.player_x = player.player_x + 1
+        elif direction == "south" and player.get_player_x() != len(self.room)-1:
+            if self.room[player.get_player_x()+1][player.get_player_y()] == 0:
+                player.set_player_x(player.get_player_x() + 1)
             else:
                 print("object is in your path")
 
-        elif direction == "east" and player.player_y != len(self.room[0])-1:
-            if self.room[player.player_x][player.player_y+1] == 0:
-                player.player_y = player.player_y + 1
+        elif direction == "east" and player.get_player_y() != len(self.room[0])-1:
+            if self.room[player.get_player_x()][player.get_player_y()+1] == 0:
+                player.set_player_y( player.get_player_y() + 1)
             else:
                 print("object is in your path")
 
-        elif direction == "west" and player.player_y != 0:
-            if self.room[player.player_x][player.player_y-1] == 0:
-                player.player_y = player.player_y - 1
+        elif direction == "west" and player.get_player_y() != 0:
+            if self.room[player.get_player_x()][player.get_player_y()-1] == 0:
+                player.set_player_y(player.get_player_y() - 1)
             else:
                 print("object is in your path")
 
@@ -109,13 +109,13 @@ class Room:
         Dragons will auto move towards the player
         can go over the hazard tiles
         """
-        dif_x = dragon.drag_x - player.player_x
-        dif_y = dragon.drag_y - player.player_y
-        if dif_x < 0 and self.room[dragon.drag_x+1][dragon.drag_y] != 1:
-            dragon.drag_x = dragon.drag_x + 1
-        elif dif_x > 0 and self.room[dragon.drag_x-1][dragon.drag_y] != 1:
-            dragon.drag_x = dragon.drag_x - 1
-        if dif_y < 0 and self.room[dragon.drag_x][dragon.drag_y+1] != 1:
-            dragon.drag_y = dragon.drag_y + 1
-        elif dif_y > 0 and self.room[dragon.drag_x][dragon.drag_y-1] != 1:
-            dragon.drag_y = dragon.drag_y - 1
+        dif_x = dragon.get_drag_x() - player.get_player_x()
+        dif_y = dragon.get_drag_y() - player.get_player_y()
+        if dif_x < 0 and self.room[dragon.get_drag_x() + 1][dragon.get_drag_y()] != 1:
+            dragon.set_drag_x(dragon.get_drag_x() + 1)
+        elif dif_x > 0 and self.room[dragon.get_drag_x() - 1][dragon.get_drag_y()] != 1:
+            dragon.set_drag_x(dragon.get_drag_x() - 1)
+        if dif_y < 0 and self.room[dragon.get_drag_x()][dragon.get_drag_y()+1] != 1:
+            dragon.set_drag_y(dragon.get_drag_y() + 1)
+        elif dif_y > 0 and self.room[dragon.get_drag_x()][dragon.get_drag_y() - 1] != 1:
+            dragon.set_drag_y(dragon.get_drag_y() - 1)
