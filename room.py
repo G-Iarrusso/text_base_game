@@ -5,11 +5,12 @@ Room class for the TBG
 
 class Room:
 
-    def __init__(self, x, y, player=None, dragons=None, hazards=None):
+    def __init__(self, x, y, goals, player=None, dragons=None, hazards=None):
         """
         creates the room
         """
         self.room = [[0]*x for i in range(y)]
+        self.goals = goals
         if player is not None:
             self.room[player.player_x][player.player_y] = 1
 
@@ -73,9 +74,35 @@ class Room:
         print(dungeon_room)
         return dungeon_room
 
+    def print_cleared_room(self, player):
+
+        self.update_room(player=player)
+        for goal in self.goals:
+            g_x, g_y = goal.get_goal_x(), goal.get_goal_y()
+            self.room[g_x][g_y] = goal.get_goal_type()
+
+        dungeon_room = ""
+        for x in range(len(self.room)):
+            dungeon_line = ""
+            for y in range(len(self.room[x])):
+                if self.room[x][y] == 1:
+                    dungeon_line += "[X]"
+
+                elif self.room[x][y] == "g":
+                    dungeon_line += "[G]"
+                elif self.room[x][y] == "s":
+                    dungeon_line += "[S]"
+
+                else:
+                    dungeon_line += "[ ]"
+            dungeon_line += "\n"
+            dungeon_room += dungeon_line
+        print(dungeon_room)
+        return dungeon_room
+
     def player_movement(self, direction, player):
         """
-        Player uses the cardinal directions to move on the map 
+        Player uses the cardinal directions to move on the map
         """
         if direction == "north" and player.get_player_x() != 0:
             if self.room[player.get_player_x()-1][player.get_player_y()] == 0:
