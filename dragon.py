@@ -61,3 +61,9 @@ class Dragons:
         Add a new dragon to the room
         """
         self.dragons.append(dragon)
+    
+    def num_dragons(self):
+        """
+        Add a new dragon to the room
+        """
+        return len(self.dragons)

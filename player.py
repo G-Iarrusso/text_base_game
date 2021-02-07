@@ -52,8 +52,8 @@ class Player:
         self.current_health = self.current_health + armour
 
     def bandage(self):
-        if self.bandage > 0:
-            self.bandage = self.bandage - 1
+        if self.current_bandage > 0:
+            self.current_bandage = self.current_bandage - 1
             self.heal(5)
             return True
         return False
@@ -77,6 +77,9 @@ class Player:
 
     def get_player_health(self):
         return self.current_health
+
+    def get_player_starting_health(self):
+        return self.starting_health
 
     def get_player_qa_dmg(self):
         return self.quick_attack_dmg

@@ -43,7 +43,7 @@ def quick_attack(player, dragon, num):
 
 
 def heavy_attack(player, dragon, num):
-    if num <= player.get_player_ha_acc:
+    if num <= player.get_player_ha_acc():
         dragon.set_drag_health(dragon.get_drag_health()-player.get_player_ha_dmg())
         return True
     return False
@@ -87,10 +87,10 @@ def tail(player, dragon, block, dodge):
     if dodge:
         return -1
     elif block:
-        player.set_drag_health(player.get_player_health()-(dragon.get_drag_tail() * BLOCK_VAL))
+        player.set_player_health(player.get_player_health()-(dragon.get_drag_tail() * BLOCK_VAL))
         return 0
     else:
-        player.set_drag_health(player.get_player_health-dragon.get_drag_tail())
+        player.set_player_health(player.get_player_health()-dragon.get_drag_tail())
         return 1
 
 
