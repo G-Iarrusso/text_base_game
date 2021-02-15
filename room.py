@@ -5,11 +5,11 @@ Room class for the TBG
 
 class Room:
 
-    def __init__(self, x, y, goals, player=None, dragons=None, hazards=None):
+    def __init__(self, x, y, goals=None, player=None, dragons=None, hazards=None):
         """
         creates the room
         """
-        self.room = [[0]*x for i in range(y)]
+        self.room = [[0]*y for i in range(x)]
         self.goals = goals
         if player is not None:
             self.room[player.player_x][player.player_y] = 1
@@ -41,6 +41,7 @@ class Room:
             for dragon in dragons.dragons:
                 d_x, d_y = dragon.drag_x, dragon.drag_y
                 self.room[d_x][d_y] = dragon.species
+
 
     def print_room(self):
         """
@@ -77,7 +78,7 @@ class Room:
     def print_cleared_room(self, player):
 
         self.update_room(player=player)
-        for goal in self.goals:
+        for goal in self.goals.goals:
             g_x, g_y = goal.get_goal_x(), goal.get_goal_y()
             self.room[g_x][g_y] = goal.get_goal_type()
 
@@ -87,12 +88,10 @@ class Room:
             for y in range(len(self.room[x])):
                 if self.room[x][y] == 1:
                     dungeon_line += "[X]"
-
                 elif self.room[x][y] == "g":
                     dungeon_line += "[G]"
                 elif self.room[x][y] == "s":
                     dungeon_line += "[S]"
-
                 else:
                     dungeon_line += "[ ]"
             dungeon_line += "\n"
@@ -107,29 +106,36 @@ class Room:
         if direction == "north" and player.get_player_x() != 0:
             if self.room[player.get_player_x()-1][player.get_player_y()] == 0:
                 player.set_player_x(player.get_player_x() - 1)
-            else:
-                print("object is in your path")
+                return 1
+            elif self.room[player.get_player_x()-1][player.get_player_y()] == "g":
+                player.set_player_x(player.get_player_x() - 1)
+                return 1
 
         elif direction == "south" and player.get_player_x() != len(self.room)-1:
             if self.room[player.get_player_x()+1][player.get_player_y()] == 0:
                 player.set_player_x(player.get_player_x() + 1)
-            else:
-                print("object is in your path")
+                return 1
+            elif self.room[player.get_player_x()+1][player.get_player_y()] == "g":
+                player.set_player_x(player.get_player_x() + 1)
+                return 1
 
         elif direction == "east" and player.get_player_y() != len(self.room[0])-1:
             if self.room[player.get_player_x()][player.get_player_y()+1] == 0:
-                player.set_player_y( player.get_player_y() + 1)
-            else:
-                print("object is in your path")
+                player.set_player_y(player.get_player_y() + 1)
+                return 1
+            elif self.room[player.get_player_x()][player.get_player_y()+1] == "g":
+                player.set_player_y(player.get_player_y() + 1)
+                return 1
 
         elif direction == "west" and player.get_player_y() != 0:
             if self.room[player.get_player_x()][player.get_player_y()-1] == 0:
                 player.set_player_y(player.get_player_y() - 1)
-            else:
-                print("object is in your path")
+                return 1
+            if self.room[player.get_player_x()][player.get_player_y()-1] == "g":
+                player.set_player_y(player.get_player_y() - 1)
+                return 1
 
-        else:
-            print("invalid input please try again")
+        return 0
 
     def dragon_movement(self, dragon, player):
         """
@@ -146,3 +152,18 @@ class Room:
             dragon.set_drag_y(dragon.get_drag_y() + 1)
         elif dif_y > 0 and self.room[dragon.get_drag_x()][dragon.get_drag_y() - 1] != 1:
             dragon.set_drag_y(dragon.get_drag_y() - 1)
+
+    def is_clear(self, player):
+        for line in self.room:
+            for tile in line:
+                if tile != 0 and tile != 1:
+                    return 0
+        return 1
+
+    def on_goal(self, player):
+        if self.is_clear(player):
+            for goal in self.goals:
+                outcome = player.get_player_x() == goal.get_goal_x() and player.get_player_y() == goal.get_drag_y()
+                if outcome:
+                    return 1
+        return 0

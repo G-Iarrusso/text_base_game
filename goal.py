@@ -7,8 +7,8 @@ class Goal:
         self.y = y
         if goal_type == "goal":
             self.tile = "g"
-        elif goal_type == "side":
-            self.tile = "s"
+        elif goal_type == "door":
+            self.tile = "d"
 
     def get_goal_type(self):
         return self.tile
