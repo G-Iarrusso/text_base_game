@@ -1,6 +1,3 @@
-from subprocess import call
-call(["python", "test.py"])
-input("youve made it back?")
 """
 TODO
 add a dict for #:test file
@@ -22,3 +19,11 @@ can expand to targeted regression i.e. movement, attacking, scavenging
 
 run each test
 """
+import glob
+from subprocess import call
+
+txtfiles = []
+for file in glob.glob("UT*.py"):
+    txtfiles.append(file)
+    call(["python", file])
+print(txtfiles)

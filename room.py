@@ -156,14 +156,16 @@ class Room:
     def is_clear(self, player):
         for line in self.room:
             for tile in line:
-                if tile != 0 and tile != 1:
+                if tile not in [0, 1, "g"]:
+                    print(tile)
                     return 0
         return 1
 
     def on_goal(self, player):
         if self.is_clear(player):
-            for goal in self.goals:
-                outcome = player.get_player_x() == goal.get_goal_x() and player.get_player_y() == goal.get_drag_y()
+            for goal in self.goals.goals:
+                outcome = player.get_player_x() == goal.get_goal_x() and player.get_player_y() == goal.get_goal_y()
+                print(outcome)
                 if outcome:
                     return 1
         return 0

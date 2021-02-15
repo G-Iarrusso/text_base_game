@@ -38,6 +38,7 @@ test_room.print_cleared_room(test_player)
 assert test_room.player_movement("east", test_player)
 test_room.update_room(player=test_player, dragons=dragons)
 test_room.print_cleared_room(test_player)
+
 assert test_room.on_goal(test_player)
 
 print("UT14_goal_room: PASSED")
