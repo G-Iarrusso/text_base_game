@@ -1,20 +1,4 @@
-import random
 # player stats
-quick_attack_dmg = 15
-quick_attack_acc = 95
-
-heavy_attack_dmg = 30
-heavy_attack_acc = 75
-
-dodge_acc = 75
-
-block_acc = 95
-block_val = 0.05
-
-# dragon stats
-claw_dmg = 5
-breath_dmg = 10
-tail_dmg = 15
 
 
 class Player:
@@ -24,8 +8,20 @@ class Player:
         """
         self.starting_health = starting_health
         self.current_health = current_health
+        self.starting_bandage = 3
+        self.current_bandage = 3
         self.player_x = player_x
         self.player_y = player_y
+
+        self.quick_attack_dmg = 15
+        self.quick_attack_acc = 95
+        self.heavy_attack_dmg = 30
+        self.heavy_attack_acc = 75
+        self.dodge_acc = 75
+        self.block_acc = 95
+
+    def is_dead(self):
+        return self.current_health <= 0
 
     def take_damage(self, damage):
         """
@@ -38,7 +34,7 @@ class Player:
 
     def heal_all(self):
         """
-        heals the player to their startign health
+        heals the player to their starting health
         """
         self.current_health = self.starting_health
 
@@ -55,120 +51,59 @@ class Player:
         self.starting_health = self.starting_health + armour
         self.current_health = self.current_health + armour
 
-    def is_in_combat(self, room):
-        # adjacents
-        if room.room[self.player_x][self.player_y] == 'earth':
+    def bandage(self):
+        if self.current_bandage > 0:
+            self.current_bandage = self.current_bandage - 1
+            self.heal(5)
             return True
-        elif room.room[self.player_x+1][self.player_y] == 'earth':
-            return True
-        elif room.room[self.player_x-1][self.player_y] == 'earth':
-            return True
-        elif room.room[self.player_x][self.player_y+1] == 'earth':
-            return True
-        elif room.room[self.player_x][self.player_y-1] == 'earth':
-            return True
+        return False
 
-        # diagonals
-        elif room.room[self.player_x+1][self.player_y+1] == 'earth':
-            return True
-        elif room.room[self.player_x+1][self.player_y-1] == 'earth':
-            return True
-        elif room.room[self.player_x-1][self.player_y+1] == 'earth':
-            return True
-        elif room.room[self.player_x-1][self.player_y-1] == 'earth':
-            return True
+    def gain_damage(self, amount):
+        self.heavy_attack_dmg = self.heavy_attack_dmg + amount
+        self.quick_attack_dmg = self.quick_attack_dmg + amount
 
-        else:
-            return False
+    def add_bandage(self, amount):
+        self.current_bandage = self.current_bandage + amount
+        self.starting_bandage = self. starting_bandage + amount
 
-    def combat(self, dragon, dragons):
+    def reset_bandage(self):
+        self.current_bandage = self.add_bandage
 
-        while self.current_health > 0 and dragon.current_health > 0:
-            block = False
-            dodge = False
-            print("\nYour health: " + str(self.current_health))
-            print("Dragons health: " + str(dragon.current_health))
-            print("Enter one of these commands\n'qa' for quick attack\n'ha' for heavy attack\n'do' for dodge\n'bl' for block.")
-            action = input('')
-            rand = random.randint(0,100)
-            if action == "qa":
+    def get_player_x(self):
+        return self.player_x
 
-                # if (0,100)<=95
-                if rand <= quick_attack_acc:
-                    print("You hit with a quick attack")
-                    dragon.current_health = dragon.current_health-quick_attack_dmg
-                else:
-                    print("You miss with a quick attack")
+    def get_player_y(self):
+        return self.player_y
 
-            elif action == 'ha':
+    def get_player_health(self):
+        return self.current_health
 
-                # if (0,100)<=75
-                if rand <= heavy_attack_acc:
-                    print("You hit with a heavy attack for big damage")
-                    dragon.current_health = dragon.current_health-heavy_attack_dmg
-                else:
-                    print("You swing for a big attack but the dragon moves and you miss")
+    def get_player_starting_health(self):
+        return self.starting_health
 
-            elif action == "bl":
+    def get_player_qa_dmg(self):
+        return self.quick_attack_dmg
 
-                # if (0,100)<=95
-                if rand <= block_acc:
-                    print("You raise your shield")
-                    block = True
-                else:
-                    print("The dragon goes around your shield")
+    def get_player_qa_acc(self):
+        return self.quick_attack_acc
 
-            elif action == 'do':
+    def get_player_ha_dmg(self):
+        return self.heavy_attack_dmg
 
-                # if (0,100)<=75
-                if rand <= dodge_acc:
-                    print("You get ready to dodge the next attack")
-                    dodge = True
-                else:
-                    print("You trip while trying to get out of the way")
+    def get_player_ha_acc(self):
+        return self.heavy_attack_acc
 
-            else:
-                print("Invalid command")
-                continue
+    def get_player_do_acc(self):
+        return self.dodge_acc
 
-            drag_action = random.randint(1,3)
+    def get_player_bl_acc(self):
+        return self.block_acc
 
-            if drag_action == 1:
-                if dodge:
-                    print("You get out of the way of the claw")
-                elif block:
-                    print("Your shield aborbs most of the claw attack")
-                    self.current_health = self.current_health-(claw_dmg * block_val)
-                else:
-                    print("The dragon swipes with its claws and hits you")
-                    self.current_health = self.current_health-claw_dmg
+    def set_player_x(self, x):
+        self.player_x = x
 
-            elif drag_action == 2:
-                if dodge:
-                    print("You get out of the way of the breath attack")
-                elif block:
-                    print("Your shield aborbs most of the breath attack")
-                    self.current_health = self.current_health-(breath_dmg * block_val)
-                else:
-                    print("The dragon uses its dragon breath to hurt you")
-                    self.current_health = self.current_health-breath_dmg
+    def set_player_y(self, y):
+        self.player_y = y
 
-            elif drag_action == 3:
-                if dodge:
-                    print("You get out of the way of the tail attack")
-                elif block:
-                    print("Your shield aborbs most of the force of the tail")
-                    self.current_health = self.current_health-(tail_dmg * block_val)
-                else:
-                    print("The dragon uses its dragon breath to hurt you")
-                    self.current_health = self.current_health-tail_dmg
-
-            if self.current_health <= 0:
-                return False
-            elif dragon.current_health <= 0:
-                dragons.clear_dragon(dragon)
-                print("Your health: "+str(self.current_health))
-                print("Dragons health: 0")
-
-                return True
-
+    def set_player_health(self, health):
+        self.current_health = health

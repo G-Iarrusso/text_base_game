@@ -4,27 +4,52 @@ from player import Player
 from dragon import Dragon, Dragons
 from debugging import print_dragons, print_player, print_hazards
 """
-TC-1 player can move NESW
-TC-2 player cannot move through walls
-TC-3 player cannot move through hazards
-TC-4 adding a hazard updates properly
-TC-s removing a hazard updates properly
-TC-6 adding a dragon updates properly
-TC-7 dragons can move through the hazards
-TC-8 dragons will chase the player
-TC-9 when player within 1 square of dragon combat starts
-TC-10 player can die in combat
+UT1
+TC-1 player can move NESW - DONE
+
+UT2
+TC-2 player cannot move through walls - DONE
+
+UT3
+TC-3 player cannot move through hazards - DONE
+
+UT4
+TC-4 adding a hazard updates properly - DONE
+TC-s removing a hazard updates properly - DONE
+
+UT5
+TC-6 adding a dragon updates properly - DONE
+
+UT6
+TC-8 dragons will chase the player - DONE
+
+UT7
+TC-9 when player within 1 square of dragon combat starts - DONE
+
+UT8
+TC-10 player can die in combat - DONE
+
+UT9
 TC-11 player can use quick attack
 TC-12 player can use Heavy attack
 TC-13 player can use dodge
 TC-14 player can use block
+
+UT10
 TC-15 dragon will use claw
 TC-16 dragon will use tail
 TC-17 dragon will use breath
+
+UT11
 TC-18 dead dragon will be removed
+
+UT12
 TC-19 player heal all works
 TC-20 Player heal amount works
 TC-21 player get armour works
+
+UT13
+TC-7 dragons can move through the hazards
 """
 
 

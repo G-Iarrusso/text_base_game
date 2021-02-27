@@ -11,6 +11,19 @@ class Hazard:
             self.tile = "w"
         elif tile_hazard == "earth":
             self.tile = "e"
+        elif tile_hazard == "tree":
+            self.tile = "t"
+        elif tile_hazard == "pillar":
+            self.tile = "p"
+
+    def get_hazard_type(self):
+        return self.tile
+
+    def get_hazard_x(self):
+        return self.x
+
+    def get_hazard_y(self):
+        return self.y
 
 
 class Hazards:
@@ -24,7 +37,6 @@ class Hazards:
         for cur_hazard in (self.hazards):
             if hazard in self.hazards:
                 self.hazards.remove(hazard)
-                self.print_hazards()
 
     def add_hazard(self, hazard):
         """
