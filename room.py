@@ -42,7 +42,6 @@ class Room:
                 d_x, d_y = dragon.drag_x, dragon.drag_y
                 self.room[d_x][d_y] = dragon.species
 
-
     def print_room(self):
         """
         This prints the room for the user, this isnt like other prints this is for actual game
@@ -164,7 +163,8 @@ class Room:
     def on_goal(self, player):
         if self.is_clear(player):
             for goal in self.goals.goals:
-                outcome = player.get_player_x() == goal.get_goal_x() and player.get_player_y() == goal.get_goal_y()
+                outcome = player.get_player_x() == goal.get_goal_x(
+                ) and player.get_player_y() == goal.get_goal_y()
                 print(outcome)
                 if outcome:
                     return 1

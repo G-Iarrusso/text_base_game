@@ -15,7 +15,8 @@ test_room.update_room(player=test_player, dragons=room_dragons)
 control_dragon = Dragon(4, 4, "water", 10, 10)
 control_dragons = Dragons([control_dragon])
 control_room = Room(10, 10, player=test_player, dragons=control_dragons)
-assert test_room.print_room() == control_room.print_room(), "UT6_dragon_chasing: FAILED - Test fails on first movement"
+assert test_room.print_room() == control_room.print_room(
+), "UT6_dragon_chasing: FAILED - Test fails on first movement"
 
 print("Step 2: Second move")
 test_room.dragon_movement(dragon, test_player)
@@ -23,7 +24,8 @@ test_room.update_room(player=test_player, dragons=room_dragons)
 control_dragon = Dragon(3, 3, "water", 10, 10)
 control_dragons = Dragons([control_dragon])
 control_room = Room(10, 10, player=test_player, dragons=control_dragons)
-assert test_room.print_room() == control_room.print_room(), "UT6_dragon_chasing: FAILED - Test fails on second movement"
+assert test_room.print_room() == control_room.print_room(
+), "UT6_dragon_chasing: FAILED - Test fails on second movement"
 
 print("Step 3: Third move")
 test_room.dragon_movement(dragon, test_player)
@@ -31,7 +33,8 @@ test_room.update_room(player=test_player, dragons=room_dragons)
 control_dragon = Dragon(2, 2, "water", 10, 10)
 control_dragons = Dragons([control_dragon])
 control_room = Room(10, 10, player=test_player, dragons=control_dragons)
-assert test_room.print_room() == control_room.print_room(), "UT6_dragon_chasing: FAILED - Test fails on third movement"
+assert test_room.print_room() == control_room.print_room(
+), "UT6_dragon_chasing: FAILED - Test fails on third movement"
 
 print("Step 4: Fourth move")
 test_room.dragon_movement(dragon, test_player)
@@ -39,7 +42,8 @@ test_room.update_room(player=test_player, dragons=room_dragons)
 control_dragon = Dragon(1, 2, "water", 10, 10)
 control_dragons = Dragons([control_dragon])
 control_room = Room(10, 10, player=test_player, dragons=control_dragons)
-assert test_room.print_room() == control_room.print_room(), "UT6_dragon_chasing: FAILED - Test fails on fourth movement"
+assert test_room.print_room() == control_room.print_room(
+), "UT6_dragon_chasing: FAILED - Test fails on fourth movement"
 
 print("Step 4: Fourth move")
 test_room.dragon_movement(dragon, test_player)
@@ -47,6 +51,7 @@ test_room.update_room(player=test_player, dragons=room_dragons)
 control_dragon = Dragon(1, 2, "water", 10, 10)
 control_dragons = Dragons([control_dragon])
 control_room = Room(10, 10, player=test_player, dragons=control_dragons)
-assert test_room.print_room() == control_room.print_room(), "UT6_dragon_chasing: FAILED - Test fails on final movement"
+assert test_room.print_room() == control_room.print_room(
+), "UT6_dragon_chasing: FAILED - Test fails on final movement"
 
 print("UT6_dragon_chasing: PASSED")

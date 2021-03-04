@@ -75,6 +75,7 @@ print("Step 9: not in combat")
 room_dragons.clear_dragon(dragon)
 test_room.update_room(player=test_player, dragons=room_dragons)
 test_room.print_room()
-assert not is_in_combat(test_player, test_room), "Player should not be in combat"
+assert not is_in_combat(
+    test_player, test_room), "Player should not be in combat"
 
 print("UT7_is_in_combat: PASSED")

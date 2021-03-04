@@ -11,12 +11,14 @@ print("Step 1: Adding hazard")
 room_hazards.add_hazard(hazard)
 test_room.update_room(hazards=room_hazards)
 control_room = Room(1, 1, hazards=room_hazards)
-assert test_room.print_room() == control_room.print_room(), "UT4_hazard_addition_and_deletion: FAILED - Test fails on moving north"
+assert test_room.print_room() == control_room.print_room(
+), "UT4_hazard_addition_and_deletion: FAILED - Test fails on moving north"
 
 print("Step 2: Removing hazard")
 room_hazards.clear_hazard(hazard)
 test_room.update_room(hazards=room_hazards)
 control_room = Room(1, 1)
-assert test_room.print_room() == control_room.print_room(), "UT4_hazard_addition_and_deletion: FAILED - Test fails on moving east"
+assert test_room.print_room() == control_room.print_room(
+), "UT4_hazard_addition_and_deletion: FAILED - Test fails on moving east"
 
 print("UT4_hazard_addition_and_deletion: PASSED")

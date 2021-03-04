@@ -11,12 +11,14 @@ print("Step 1: Adding dragon")
 room_dragons.add_dragon(dragon)
 test_room.update_room(dragons=room_dragons)
 control_room = Room(1, 1, dragons=room_dragons)
-assert test_room.print_room() == control_room.print_room(), "UT5_dragon_addition_and_deletion: FAILED - Test fails on moving north"
+assert test_room.print_room() == control_room.print_room(
+), "UT5_dragon_addition_and_deletion: FAILED - Test fails on moving north"
 
 print("Step 2: Removing dragon")
 room_dragons.clear_dragon(dragon)
 test_room.update_room(dragons=room_dragons)
 control_room = Room(1, 1)
-assert test_room.print_room() == control_room.print_room(), "UT5_dragon_addition_and_deletion: FAILED - Test fails on moving east"
+assert test_room.print_room() == control_room.print_room(
+), "UT5_dragon_addition_and_deletion: FAILED - Test fails on moving east"
 
 print("UT5_dragon_addition_and_deletion: PASSED")

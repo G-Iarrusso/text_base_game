@@ -17,21 +17,25 @@ test_room.player_movement("north", test_player)
 test_room.update_room(player=test_player, hazards=room_hazards)
 control_player = Player(1, 1, 1, 1)
 control_room = Room(3, 3, player=control_player, hazards=room_hazards)
-assert test_room.print_room() == control_room.print_room(), "UT3_hazard_collisions: FAILED - Test fails on moving north"
+assert test_room.print_room() == control_room.print_room(
+), "UT3_hazard_collisions: FAILED - Test fails on moving north"
 
 print("Step 2: Moving east")
 test_room.player_movement("east", test_player)
 test_room.update_room(player=test_player, hazards=room_hazards)
-assert test_room.print_room() == control_room.print_room(), "UT3_hazard_collisions: FAILED - Test fails on moving east"
+assert test_room.print_room() == control_room.print_room(
+), "UT3_hazard_collisions: FAILED - Test fails on moving east"
 
 print("Step 2: Moving south")
 test_room.player_movement("south", test_player)
 test_room.update_room(player=test_player, hazards=room_hazards)
-assert test_room.print_room() == control_room.print_room(), "UT3_hazard_collisions: FAILED - Test fails on moving south"
+assert test_room.print_room() == control_room.print_room(
+), "UT3_hazard_collisions: FAILED - Test fails on moving south"
 
 print("Step 4: Moving west")
 test_room.player_movement("west", test_player)
 test_room.update_room(player=test_player, hazards=room_hazards)
-assert test_room.print_room() == control_room.print_room(), "UT3_hazard_collisions: FAILED - Test fails on moving south"
+assert test_room.print_room() == control_room.print_room(
+), "UT3_hazard_collisions: FAILED - Test fails on moving south"
 
 print("UT3_hazard_collisions: PASSED")

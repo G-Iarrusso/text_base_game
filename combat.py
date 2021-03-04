@@ -37,14 +37,16 @@ def is_in_combat(player, room):
 
 def quick_attack(player, dragon, num):
     if num <= player.get_player_qa_acc():
-        dragon.set_drag_health(dragon.get_drag_health()-player.get_player_qa_dmg())
+        dragon.set_drag_health(dragon.get_drag_health() -
+                               player.get_player_qa_dmg())
         return True
     return False
 
 
 def heavy_attack(player, dragon, num):
     if num <= player.get_player_ha_acc():
-        dragon.set_drag_health(dragon.get_drag_health()-player.get_player_ha_dmg())
+        dragon.set_drag_health(dragon.get_drag_health() -
+                               player.get_player_ha_dmg())
         return True
     return False
 
@@ -65,10 +67,12 @@ def claw(player, dragon, block, dodge):
     if dodge:
         return -1
     elif block:
-        player.set_player_health(player.get_player_health()-(dragon.get_drag_claw() * BLOCK_VAL))
+        player.set_player_health(
+            player.get_player_health()-(dragon.get_drag_claw() * BLOCK_VAL))
         return 0
     else:
-        player.set_player_health(player.get_player_health()-dragon.get_drag_claw())
+        player.set_player_health(
+            player.get_player_health()-dragon.get_drag_claw())
         return 1
 
 
@@ -76,10 +80,12 @@ def breath(player, dragon, block, dodge):
     if dodge:
         return -1
     elif block:
-        player.set_player_health(player.get_player_health()-(dragon.get_drag_breath() * BLOCK_VAL))
+        player.set_player_health(
+            player.get_player_health()-(dragon.get_drag_breath() * BLOCK_VAL))
         return 0
     else:
-        player.set_player_health(player.get_player_health()-dragon.get_drag_breath())
+        player.set_player_health(
+            player.get_player_health()-dragon.get_drag_breath())
         return 1
 
 
@@ -87,10 +93,12 @@ def tail(player, dragon, block, dodge):
     if dodge:
         return -1
     elif block:
-        player.set_player_health(player.get_player_health()-(dragon.get_drag_tail() * BLOCK_VAL))
+        player.set_player_health(
+            player.get_player_health()-(dragon.get_drag_tail() * BLOCK_VAL))
         return 0
     else:
-        player.set_player_health(player.get_player_health()-dragon.get_drag_tail())
+        player.set_player_health(
+            player.get_player_health()-dragon.get_drag_tail())
         return 1
 
 
