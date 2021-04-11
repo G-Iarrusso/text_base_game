@@ -2,8 +2,8 @@ import sys
 from pathlib import Path
 sys.path[0] = str(Path(sys.path[0]).parent)
 
-from objects.room import Room  # noqa: E402
-from objects.hazards import Hazard, Hazards  # noqa: E402
+from game.objects.room import Room  # noqa: E402
+from game.objects.hazards import Hazard, Hazards  # noqa: E402
 print("UT4_hazard_addition_and_deletion: STARTING")
 print("Step 0: Starting room is printed")
 room_hazards = Hazards([])

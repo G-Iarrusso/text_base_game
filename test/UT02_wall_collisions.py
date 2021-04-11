@@ -2,8 +2,8 @@ import sys
 from pathlib import Path
 sys.path[0] = str(Path(sys.path[0]).parent)
 
-from objects.room import Room  # noqa: E402
-from objects.player import Player  # noqa: E402
+from game.objects.room import Room  # noqa: E402
+from game.objects.player import Player  # noqa: E402
 print("UT2_wall_collisions: STARTING")
 print("Step 0: Starting room is printed")
 test_player = Player(1, 1, 0, 1)

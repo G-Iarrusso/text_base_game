@@ -2,10 +2,10 @@ import sys
 from pathlib import Path
 sys.path[0] = str(Path(sys.path[0]).parent)
 
-from objects.room import Room  # noqa: E402
-from objects.dragon import Dragon, Dragons  # noqa: E402
-from objects.player import Player  # noqa: E402
-from objects.hazards import Hazard, Hazards  # noqa: E402
+from game.objects.room import Room  # noqa: E402
+from game.objects.dragon import Dragon, Dragons  # noqa: E402
+from game.objects.player import Player  # noqa: E402
+from game.objects.hazards import Hazard, Hazards  # noqa: E402
 print("UT13_dragon_walking_hazards: STARTING")
 
 print("Step 0: Starting room is printed")
