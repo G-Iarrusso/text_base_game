@@ -1,6 +1,10 @@
-from dragon import Dragon
-from player import Player
-from combat import claw
+import sys
+from pathlib import Path
+sys.path[0] = str(Path(sys.path[0]).parent)
+
+from objects.dragon import Dragon  # noqa: E402
+from objects.player import Player  # noqa: E402
+from objects.combat import claw  # noqa: E402
 print("UT12_player_healing: STARTING")
 
 print("Step 0: Starting room is printed")

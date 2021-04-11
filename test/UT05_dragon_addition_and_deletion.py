@@ -1,5 +1,9 @@
-from room import Room
-from dragon import Dragon, Dragons
+import sys
+from pathlib import Path
+sys.path[0] = str(Path(sys.path[0]).parent)
+
+from objects.room import Room  # noqa: E402
+from objects.dragon import Dragon, Dragons  # noqa: E402
 print("UT5_dragon_addition_and_deletion: STARTING")
 print("Step 0: Starting room is printed")
 room_dragons = Dragons([])

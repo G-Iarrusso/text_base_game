@@ -1,8 +1,12 @@
-from dragon import Dragon, Dragons
-from player import Player
-from combat import quick_attack, check_deaths
-from goal import Goal, Goals
-from room import Room
+import sys
+from pathlib import Path
+sys.path[0] = str(Path(sys.path[0]).parent)
+
+from objects.dragon import Dragon, Dragons  # noqa: E402
+from objects.player import Player  # noqa: E402
+from objects.combat import quick_attack, check_deaths  # noqa: E402
+from objects.goal import Goal, Goals  # noqa: E402
+from objects.room import Room  # noqa: E402
 print("UT14_goal_room: STARTING")
 
 print("Step 0: Starting room is printed")

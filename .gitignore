@@ -14,3 +14,10 @@ __pycache__/combat.cpython-39.pyc
 __pycache__/combat.cpython-38.pyc
 __pycache__/goal.cpython-39.pyc
 __pycache__/goal.cpython-38.pyc
+objects/__pycache__/__init__.cpython-39.pyc
+objects/__pycache__/player.cpython-39.pyc
+objects/__pycache__/room.cpython-39.pyc
+objects/__pycache__/combat.cpython-39.pyc
+objects/__pycache__/goal.cpython-39.pyc
+objects/__pycache__/dragon.cpython-39.pyc
+objects/__pycache__/hazards.cpython-39.pyc

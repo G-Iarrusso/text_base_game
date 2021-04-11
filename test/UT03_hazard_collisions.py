@@ -1,6 +1,10 @@
-from room import Room
-from player import Player
-from hazards import Hazard, Hazards
+import sys
+from pathlib import Path
+sys.path[0] = str(Path(sys.path[0]).parent)
+
+from objects.room import Room  # noqa: E402
+from objects.player import Player  # noqa: E402
+from objects.hazards import Hazard, Hazards  # noqa: E402
 print("UT3_hazard_collisions: STARTING")
 print("Step 0: Starting room is printed")
 test_player = Player(1, 1, 1, 1)
