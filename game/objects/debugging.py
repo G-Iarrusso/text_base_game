@@ -1,5 +1,9 @@
 def print_player(player):
     """
+    TODO
+    change to the get/set functions
+    """
+    """
     prints the players info
     """
     print("Starting health: " + str(player.starting_health) +
@@ -9,6 +13,10 @@ def print_player(player):
 
 def print_hazard(hazard):
     """
+    TODO
+    change to the get/set functions
+    """
+    """
     Hazards info
     """
     print("X: " + str(hazard.x + 1) + " Y: " +
@@ -17,6 +25,10 @@ def print_hazard(hazard):
 
 def print_hazards(hazards):
     """
+    TODO
+    change to the get/set functions
+    """
+    """
     prints all the hazards
     """
     for hazard in hazards.hazards:
@@ -24,6 +36,10 @@ def print_hazards(hazards):
 
 
 def print_dragon(dragon):
+    """
+    TODO
+    change to the get/set functions
+    """
     """
     Dragon info
     """

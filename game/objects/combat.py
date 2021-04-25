@@ -1,15 +1,19 @@
 import random
 
-"""
-TODO
-seperate combat to player and dragon combat
-then have a combat function call both combats
-"""
 BLOCK_VAL = 0.05
+"""
+    TODO
+    add docstrings to each function/flush it out
+"""
 
 
 def is_in_combat(player, room):
     dragons = ["earth", "water", "fire"]
+    """
+    TODO:
+    remove the dragons check here move it to room
+    have it called is_dragon_near
+    """
     # adjacents
     if room.room[player.get_player_x()][player.get_player_y()] in dragons:
         return True
@@ -129,6 +133,10 @@ def dragon_combat(player, dragon, block, dodge):
 
 
 def check_deaths(player, dragon, dragons):
+    """
+    TODO
+    change to the get/set functions
+    """
     if player.current_health <= 0:
         return 0
     elif dragon.current_health <= 0:

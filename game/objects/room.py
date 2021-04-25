@@ -9,8 +9,12 @@ class Room:
         """
         creates the room
         """
-        self.room = [[0]*y for i in range(x)]
-        self.goals = goals
+    """
+    TODO
+    change to the get/set functions
+    """
+      self.room = [[0]*y for i in range(x)]
+       self.goals = goals
         if player is not None:
             self.room[player.player_x][player.player_y] = 1
 
@@ -28,8 +32,12 @@ class Room:
         """
         This will updaqte the room whenever we add or remove an entity we should call this function
         """
-        self.room = [[0]*len(self.room[0]) for i in range(len(self.room))]
-        if player is not None:
+    """
+    TODO
+    change to the get/set functions
+    """
+      self.room = [[0]*len(self.room[0]) for i in range(len(self.room))]
+       if player is not None:
             self.room[player.player_x][player.player_y] = 1
 
         if hazards is not None:
