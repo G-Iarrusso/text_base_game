@@ -1,10 +1,6 @@
 import random
 
 BLOCK_VAL = 0.05
-"""
-    TODO
-    add docstrings to each function/flush it out
-"""
 
 
 def is_in_combat(player, room):

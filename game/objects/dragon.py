@@ -1,8 +1,4 @@
 class Dragon:
-    """
-    TODO
-    add docstrings to each function/flush it out
-    """
 
     def __init__(self, x, y, species, current_health, starting_health):
         """
