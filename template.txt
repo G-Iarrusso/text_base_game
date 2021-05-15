@@ -1,0 +1,39 @@
+
+
+OBJECT TEMPLATE
+
+"""
+X class type:
+x_name : info on field, type
+...
+"""
+Variables and imports
+ def function
+"""
+fucntion description
+    Args:
+    x_arg: info on field, tpye
+    ...
+    Returns: where applicable
+"""
+Fucntion code
+REPEAT
+
+
+UNIT TEST TEMPLATE
+
+"""
+Test Goal: what is the test trying to accomplish
+"""
+imports
+
+
+Print Unit test X: Started
+Print Step X: expected outcome
+do step, assert Failed
+Print Step Y: expected outcome
+do step, assert Failed
+...
+Print Test x: Passed
+
+
