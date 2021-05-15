@@ -8,12 +8,15 @@ BLOCK_VAL = 0.05
 
 
 def is_in_combat(player, room):
+    """
+    is the player currently in combat
+    args:
+        player - the player object
+        room - the current room situation
+    returns:
+        True if player in combat, False if not
+    """
     dragons = ["earth", "water", "fire"]
-    """
-    TODO:
-    remove the dragons check here move it to room
-    have it called is_dragon_near
-    """
     # adjacents
     if room.room[player.get_player_x()][player.get_player_y()] in dragons:
         return True
@@ -35,39 +38,86 @@ def is_in_combat(player, room):
         return True
     elif room.room[player.get_player_x()-1][player.get_player_y()-1] in dragons:
         return True
-    else:
-        return False
+    return False
 
 
-def quick_attack(player, dragon, num):
-    if num <= player.get_player_qa_acc():
+def quick_attack(player, dragon, acc_num):
+    """
+    execute a quick attack
+    args:
+        player - the player object
+        dragon - the dragon the player is in combat with
+        acc_num - the random accuracy number
+    returns:
+        True if player in combat, False if not
+    """
+    if acc_num <= player.get_player_qa_acc():
         dragon.set_drag_health(dragon.get_drag_health() -
                                player.get_player_qa_dmg())
         return True
     return False
 
 
-def heavy_attack(player, dragon, num):
-    if num <= player.get_player_ha_acc():
+def heavy_attack(player, dragon, acc_num):
+    """
+    execute a heavys attack
+    args:
+        player - the player object
+        dragon - the dragon the player is in combat with
+        acc_num - the random accuracy number
+    returns:
+        True if player in combat, False if not
+    """
+    if acc_num <= player.get_player_ha_acc():
         dragon.set_drag_health(dragon.get_drag_health() -
                                player.get_player_ha_dmg())
         return True
     return False
 
 
-def block(player, num):
-    if num <= player.get_player_bl_acc():
+def block(player, acc_num):
+    """
+    execute a block
+    args:
+        player - the player object
+        dragon - the dragon the player is in combat with
+        acc_num - the random accuracy number
+    returns:
+        True if player in combat, False if not
+    """
+    if acc_num <= player.get_player_bl_acc():
         return True
     return False
 
 
-def dodge(player, num):
-    if num <= player.get_player_do_acc():
+def dodge(player, acc_num):
+    """
+    execute a dodge
+    args:
+        player - the player object
+        dragon - the dragon the player is in combat with
+        acc_num - the random accuracy number
+    returns:
+        True if player in combat, False if not
+    """
+    if acc_num <= player.get_player_do_acc():
         return True
     return False
 
 
 def claw(player, dragon, block, dodge):
+    """
+    execute a dragon claw
+    args:
+        player - the player object
+        dragon - the dragon the player is in combat with
+        block - player block outcome
+        dodge - player dodge outcome
+    returns:
+        -1 - dodge successful
+        0 - block succesful minor damage taken
+        1 - attack connects
+    """
     if dodge:
         return -1
     elif block:
@@ -81,6 +131,18 @@ def claw(player, dragon, block, dodge):
 
 
 def breath(player, dragon, block, dodge):
+    """
+    execute a dragon breath
+    args:
+        player - the player object
+        dragon - the dragon the player is in combat with
+        block - player block outcome
+        dodge - player dodge outcome
+    returns:
+        -1 - dodge successful
+        0 - block succesful minor damage taken
+        1 - attack connects
+    """
     if dodge:
         return -1
     elif block:
@@ -94,6 +156,18 @@ def breath(player, dragon, block, dodge):
 
 
 def tail(player, dragon, block, dodge):
+    """
+    execute a dragon tail
+    args:
+        player - the player object
+        dragon - the dragon the player is in combat with
+        block - player block outcome
+        dodge - player dodge outcome
+    returns:
+        -1 - dodge successful
+        0 - block succesful minor damage taken
+        1 - attack connects
+    """
     if dodge:
         return -1
     elif block:
@@ -107,6 +181,16 @@ def tail(player, dragon, block, dodge):
 
 
 def player_combat(player, dragon, action):
+    """
+    execute the player combat
+    args:
+        player - the player object
+        dragon - the dragon the player is in combat with
+        action - the user input  - string
+    returns:
+        value coresponding to outcome of user action
+        -1 if user inputs incorrect value
+    """
     rand = random.randint(0, 100)
     if action == "qa":
         return quick_attack(player, dragon, rand)
@@ -121,6 +205,14 @@ def player_combat(player, dragon, action):
 
 
 def dragon_combat(player, dragon, block, dodge):
+    """
+    execute a dragon combat
+    args:
+        player - the player object
+        dragon - the dragon the player is in combat with
+        block - player block outcome
+        dodge - player dodge outcome
+    """
     drag_action = random.randint(1, 3)
     if drag_action == 1:
         claw(player, dragon, block, dodge)
@@ -134,18 +226,33 @@ def dragon_combat(player, dragon, block, dodge):
 
 def check_deaths(player, dragon, dragons):
     """
-    TODO
-    change to the get/set functions
+    check if there anyone died
+    args
+        player - player in the game
+        dragon - current dragon in combat
+        dragons - the current list of dragons
+    returns
+        0 - if player dies
+        1 - if dragon dies
+        -1 - if nothing dies
     """
-    if player.current_health <= 0:
+    if player.get_player_health() <= 0:
         return 0
-    elif dragon.current_health <= 0:
+    elif dragon.get_drag_health() <= 0:
         dragons.clear_dragon(dragon)
         return 1
     return -1
 
 
 def combat(player, dragon, dragons, action):
+    """
+    base combat function
+    args
+        player - player in the game
+        dragon - current dragon in combat
+        dragons - the current list of dragons
+        action - player action
+    """
     block = False
     dodge = False
     outcome_player = player_combat(player, dragon, action)

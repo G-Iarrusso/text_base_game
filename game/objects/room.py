@@ -8,47 +8,51 @@ class Room:
     def __init__(self, x, y, goals=None, player=None, dragons=None, hazards=None):
         """
         creates the room
+        args:
+            x - how wide the map is - int
+            y - how tall the map is - int
+            goals - the goals for when the room is cleared - array of goal object
+            player - the player object
+            dragons - all the dragons - array of dragon objects
+            hazards - all the hazards - array of hazard objects
         """
-    """
-    TODO
-    change to the get/set functions
-    """
-      self.room = [[0]*y for i in range(x)]
-       self.goals = goals
+        self.room = [[0]*y for i in range(x)]
+        self.goals = goals
         if player is not None:
-            self.room[player.player_x][player.player_y] = 1
+            self.room[player.get_player_x()][player.get_player_y()] = 1
 
         if hazards is not None:
             for hazard in hazards.hazards:
-                h_x, h_y = hazard.x, hazard.y
-                self.room[h_x][h_y] = hazard.tile
+                h_x, h_y = hazard.get_hazard_x(), hazard.get_hazard_y()
+                self.room[h_x][h_y] = hazard.get_hazard_type()
 
         if dragons is not None:
             for dragon in dragons.dragons:
-                d_x, d_y = dragon.drag_x, dragon.drag_y
-                self.room[d_x][d_y] = dragon.species
+                d_x, d_y = dragon.get_drag_x(), dragon.get_drag_y()
+                self.room[d_x][d_y] = dragon.get_drag_species()
 
     def update_room(self, player=None, dragons=None, hazards=None):
         """
         This will updaqte the room whenever we add or remove an entity we should call this function
+        args:
+            player - the player in the room
+            dragons - the dragons -  list of dragon objects
+            hazards - the hazard - list of hazard objects
+
         """
-    """
-    TODO
-    change to the get/set functions
-    """
-      self.room = [[0]*len(self.room[0]) for i in range(len(self.room))]
-       if player is not None:
-            self.room[player.player_x][player.player_y] = 1
+        self.room = [[0]*len(self.room[0]) for i in range(len(self.room))]
+        if player is not None:
+            self.room[player.get_player_x()][player.get_player_y()] = 1
 
         if hazards is not None:
             for hazard in hazards.hazards:
-                h_x, h_y = hazard.x, hazard.y
-                self.room[h_x][h_y] = hazard.tile
+                h_x, h_y = hazard.get_hazard_x(), hazard.get_hazard_y()
+                self.room[h_x][h_y] = hazard.get_hazard_type()
 
         if dragons is not None:
             for dragon in dragons.dragons:
-                d_x, d_y = dragon.drag_x, dragon.drag_y
-                self.room[d_x][d_y] = dragon.species
+                d_x, d_y = dragon.get_drag_x(), dragon.get_drag_y()
+                self.room[d_x][d_y] = dragon.get_drag_species()
 
     def print_room(self):
         """
@@ -83,7 +87,11 @@ class Room:
         return dungeon_room
 
     def print_cleared_room(self, player):
-
+        """
+        print the cleared room afetr all enemies are dead
+        args:
+            player - player object
+        """
         self.update_room(player=player)
         for goal in self.goals.goals:
             g_x, g_y = goal.get_goal_x(), goal.get_goal_y()
@@ -109,6 +117,12 @@ class Room:
     def player_movement(self, direction, player):
         """
         Player uses the cardinal directions to move on the map
+        args
+            direcrtion - the direction the player is moving
+            player - the player object
+        returns
+            1 - if succesful
+            0 - if fails
         """
         if direction == "north" and player.get_player_x() != 0:
             if self.room[player.get_player_x()-1][player.get_player_y()] == 0:
@@ -146,8 +160,10 @@ class Room:
 
     def dragon_movement(self, dragon, player):
         """
-        Dragons will auto move towards the player
-        can go over the hazard tiles
+        Dragons will auto move towards the player can go over the hazard tiles
+        args
+            dragon - dragon moving
+            player - player getting moved to
         """
         dif_x = dragon.get_drag_x() - player.get_player_x()
         dif_y = dragon.get_drag_y() - player.get_player_y()
@@ -161,6 +177,11 @@ class Room:
             dragon.set_drag_y(dragon.get_drag_y() - 1)
 
     def is_clear(self, player):
+        """
+        check if the room is clear
+        args
+            player - player object
+        """
         for line in self.room:
             for tile in line:
                 if tile not in [0, 1, "g"]:
@@ -169,6 +190,14 @@ class Room:
         return 1
 
     def on_goal(self, player):
+        """
+        check if the player is on goal tile
+        args
+            player - player in the game
+        returns
+            0 - if player dies
+            1 - if dragon dies
+        """
         if self.is_clear(player):
             for goal in self.goals.goals:
                 outcome = player.get_player_x() == goal.get_goal_x(
