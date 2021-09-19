@@ -1,14 +1,13 @@
-
 import sys
 from pathlib import Path
 sys.path[0] = str(Path(sys.path[0]).parent)
-from objects.room import Room
-from objects.goal import Goal, Goals
-from objects.player import Player
-from objects.debugging import print_dragon, print_hazards, print_hazard, print_goal, print_player
-from objects.dragon import Dragon, Dragons
-from objects.hazards import Hazard, Hazards
-from builder.room_data import (_get_room_info, _get_dragon_names, _get_dragon_info_by_name, 
+from game.objects.room import Room
+from game.objects.goal import Goal, Goals
+from game.objects.player import Player
+from game.objects.debugging import print_dragon, print_hazards, print_hazard, print_goal, print_player
+from game.objects.dragon import Dragon, Dragons
+from game.objects.hazards import Hazard, Hazards
+from game.builder.room_data import (_get_room_info, _get_dragon_names, _get_dragon_info_by_name, 
 _get_hazard_names,_get_hazard_info_by_name, _get_goal_names,_get_goal_info_by_name, _get_player_info)
 
 
@@ -73,6 +72,3 @@ def build_game(builder):
     player = builder.build_player(builder.player)
     room = Room(builder.x, builder.y, goals, player, dragons, hazards)
     room.print_room()
-
-b = Builder("first_room")
-build_game(b)
