@@ -9,3 +9,4 @@ game/builder/__pycache__/__init__.*
 game/builder/__pycache__/builder.*
 game/builder/__pycache__/room_data.*
 game/objects/__pycache__/debugging.*
+game/input/__pycache__/handler.*

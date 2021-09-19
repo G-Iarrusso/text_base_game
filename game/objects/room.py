@@ -105,7 +105,7 @@ class Room:
                     dungeon_line += "[X]"
                 elif self.room[x][y] == "g":
                     dungeon_line += "[G]"
-                elif self.room[x][y] == "s":
+                elif self.room[x][y] == "d":
                     dungeon_line += "[S]"
                 else:
                     dungeon_line += "[ ]"
@@ -124,11 +124,12 @@ class Room:
             1 - if succesful
             0 - if fails
         """
+        VALID_TILES = ["g","d"]
         if direction == "north" and player.get_player_x() != 0:
             if self.room[player.get_player_x()-1][player.get_player_y()] == 0:
                 player.set_player_x(player.get_player_x() - 1)
                 return 1
-            elif self.room[player.get_player_x()-1][player.get_player_y()] == "g":
+            elif self.room[player.get_player_x()-1][player.get_player_y()] in VALID_TILES:
                 player.set_player_x(player.get_player_x() - 1)
                 return 1
 
@@ -136,7 +137,7 @@ class Room:
             if self.room[player.get_player_x()+1][player.get_player_y()] == 0:
                 player.set_player_x(player.get_player_x() + 1)
                 return 1
-            elif self.room[player.get_player_x()+1][player.get_player_y()] == "g":
+            elif self.room[player.get_player_x()+1][player.get_player_y()] in VALID_TILES:
                 player.set_player_x(player.get_player_x() + 1)
                 return 1
 
@@ -144,7 +145,7 @@ class Room:
             if self.room[player.get_player_x()][player.get_player_y()+1] == 0:
                 player.set_player_y(player.get_player_y() + 1)
                 return 1
-            elif self.room[player.get_player_x()][player.get_player_y()+1] == "g":
+            elif self.room[player.get_player_x()][player.get_player_y()+1] in VALID_TILES:
                 player.set_player_y(player.get_player_y() + 1)
                 return 1
 
@@ -152,7 +153,7 @@ class Room:
             if self.room[player.get_player_x()][player.get_player_y()-1] == 0:
                 player.set_player_y(player.get_player_y() - 1)
                 return 1
-            if self.room[player.get_player_x()][player.get_player_y()-1] == "g":
+            if self.room[player.get_player_x()][player.get_player_y()-1] in VALID_TILES:
                 player.set_player_y(player.get_player_y() - 1)
                 return 1
 
@@ -176,16 +177,13 @@ class Room:
         elif dif_y > 0 and self.room[dragon.get_drag_x()][dragon.get_drag_y() - 1] != 1:
             dragon.set_drag_y(dragon.get_drag_y() - 1)
 
-    def is_clear(self, player):
+    def is_clear(self):
         """
         check if the room is clear
-        args
-            player - player object
         """
         for line in self.room:
             for tile in line:
-                if tile not in [0, 1, "g"]:
-                    print(tile)
+                if tile not in [0, 1, "g", "f", "e", "w","d"]:
                     return 0
         return 1
 
@@ -198,11 +196,11 @@ class Room:
             0 - if player dies
             1 - if dragon dies
         """
-        if self.is_clear(player):
+        if self.is_clear():
             for goal in self.goals.goals:
                 outcome = player.get_player_x() == goal.get_goal_x(
                 ) and player.get_player_y() == goal.get_goal_y()
                 print(outcome)
                 if outcome:
-                    return 1
-        return 0
+                    return True
+        return False

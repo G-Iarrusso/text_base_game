@@ -26,7 +26,7 @@ check_deaths(test_player, dragon, dragons)
 print("Step 2: Print clean room")
 assert dragons.num_dragons() == 0
 test_room.update_room(player=test_player, dragons=dragons)
-assert test_room.is_clear(test_player)
+assert test_room.is_clear()
 room_print = test_room.print_cleared_room(test_player)
 assert "G" in room_print
 

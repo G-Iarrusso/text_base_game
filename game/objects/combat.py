@@ -3,7 +3,7 @@ import random
 BLOCK_VAL = 0.05
 
 
-def is_in_combat(player, room):
+def is_in_combat(player, dragons ):
     """
     is the player currently in combat
     args:
@@ -12,28 +12,29 @@ def is_in_combat(player, room):
     returns:
         True if player in combat, False if not
     """
-    dragons = ["earth", "water", "fire"]
+    #need to return a dragon here
+    for dragon in dragons.dragons:
     # adjacents
-    if room.room[player.get_player_x()][player.get_player_y()] in dragons:
-        return True
-    elif room.room[player.get_player_x()+1][player.get_player_y()] in dragons:
-        return True
-    elif room.room[player.get_player_x()-1][player.get_player_y()] in dragons:
-        return True
-    elif room.room[player.get_player_x()][player.get_player_y()+1] in dragons:
-        return True
-    elif room.room[player.get_player_x()][player.get_player_y()-1] in dragons:
-        return True
-
-    # diagonals
-    elif room.room[player.get_player_x()+1][player.get_player_y()+1] in dragons:
-        return True
-    elif room.room[player.get_player_x()+1][player.get_player_y()-1] in dragons:
-        return True
-    elif room.room[player.get_player_x()-1][player.get_player_y()+1] in dragons:
-        return True
-    elif room.room[player.get_player_x()-1][player.get_player_y()-1] in dragons:
-        return True
+        if player.get_player_x() == dragon.get_drag_x() and player.get_player_y() == dragon.get_drag_y():
+            return dragon
+        elif player.get_player_x() + 1 == dragon.get_drag_x() and player.get_player_y() == dragon.get_drag_y():
+            return dragon
+        elif player.get_player_x() - 1 == dragon.get_drag_x() and player.get_player_y() == dragon.get_drag_y():
+            return dragon
+        elif player.get_player_x() == dragon.get_drag_x() and player.get_player_y() == dragon.get_drag_y() + 1:
+            return dragon
+        elif player.get_player_x() == dragon.get_drag_x() and player.get_player_y() == dragon.get_drag_y() - 1:
+            return dragon
+        
+        # diagonals
+        elif player.get_player_x() + 1 == dragon.get_drag_x() and player.get_player_y() + 1== dragon.get_drag_y():
+            return dragon
+        elif player.get_player_x() + 1 == dragon.get_drag_x() and player.get_player_y() - 1 == dragon.get_drag_y():
+            return dragon
+        elif player.get_player_x() -1 == dragon.get_drag_x() and player.get_player_y() +1 == dragon.get_drag_y():
+            return dragon
+        elif player.get_player_x() -1 == dragon.get_drag_x() and player.get_player_y() -1== dragon.get_drag_y():
+            return dragon
     return False
 
 
@@ -194,10 +195,8 @@ def player_combat(player, dragon, action):
         return heavy_attack(player, dragon, rand)
     elif action == "bl":
         return block(player, rand)
-    elif action == 'do':
+    elif action == 'dg':
         return dodge(player, rand)
-    else:
-        return -1
 
 
 def dragon_combat(player, dragon, block, dodge):
@@ -258,4 +257,5 @@ def combat(player, dragon, dragons, action):
         elif action == "do":
             dodge = outcome_player
         dragon_combat(player, dragon, block, dodge)
-        check_deaths(player, dragon, dragons)
+        outcome_death = check_deaths(player, dragon, dragons)
+        return outcome_death
