@@ -54,3 +54,10 @@ def print_dragons(dragons):
     """
     for dragon in dragons.dragons:
         print_dragon(dragon)
+
+def print_goal(goal):
+    """
+    Prints the goal
+    """
+    print("X:" + str(goal.x + 1) + " Y:" +str(goal.y+1))
+    print("Type:" + str(goal.tile))

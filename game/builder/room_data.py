@@ -39,7 +39,7 @@ ROOMS = {
                 "type": "door",
             },
             "goal": {
-                "x": 2,
+                "x": 4,
                 "y": 4,
                 "type": "goal",
             }
