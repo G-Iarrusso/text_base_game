@@ -12,3 +12,6 @@ game/objects/__pycache__/dragon.cpython-38.pyc
 game/objects/__pycache__/player.cpython-38.pyc
 game/objects/__pycache__/room.cpython-38.pyc
 game/objects/__pycache__/hazards.cpython-38.pyc
+test/__pycache__/test.cpython-39-pytest-6.2.4.pyc
+test/__pycache__/__init__.cpython-39.pyc
+__pycache__/__init__.cpython-39.pyc
