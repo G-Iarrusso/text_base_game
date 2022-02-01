@@ -66,9 +66,9 @@ class Builder:
     
             
 def build_game(builder):
-    dragons = builder.build_dragons(builder.dragons)
-    hazards = builder.build_hazards(builder.hazards)
-    goals = builder.build_goals(builder.goals)
-    player = builder.build_player(builder.player)
-    room = Room(builder.x, builder.y, goals, player, dragons, hazards)
-    room.print_room()
+    builder.dragons = builder.build_dragons(builder.dragons)
+    builder.hazards = builder.build_hazards(builder.hazards)
+    builder.goals = builder.build_goals(builder.goals)
+    builder.player = builder.build_player(builder.player)
+    builder.room = Room(builder.x, builder.y, builder.goals, builder.player, builder.dragons, builder.hazards)
+    builder.room.print_room()
