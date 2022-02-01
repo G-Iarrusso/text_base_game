@@ -10,3 +10,6 @@ game/builder/__pycache__/builder.*
 game/builder/__pycache__/room_data.*
 game/objects/__pycache__/debugging.*
 game/input/__pycache__/handler.*
+test/__pycache__/__init__.*
+test/__pycache__/test.*
+__pycache__/__init__.*
