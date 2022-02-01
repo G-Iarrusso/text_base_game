@@ -206,3 +206,6 @@ class Player:
             health -  new health value - int
         """
         self.current_health = health
+
+    def get_bandage(self):
+        return self.current_bandage
